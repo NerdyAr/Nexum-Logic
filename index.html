@@ -1,0 +1,1289 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexum & Logic | Inteligencia Estratégica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --abyss-blue: #0D1B2A;
+            --pearl-gray: #E0E1DD;
+            --copper-accent: #B07D62;
+            --card-bg: rgba(25, 42, 65, 0.7);
+            --transition-slow: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--abyss-blue);
+            color: var(--pearl-gray);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Custom Cursor Styles */
+        .cursor {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--copper-accent);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--copper-accent);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            opacity: 0.7;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(176, 125, 98, 0.2);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--pearl-gray);
+            text-decoration: none;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 4px;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--copper-accent);
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .logo:hover::after {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        nav a {
+            color: var(--pearl-gray);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            position: relative;
+            padding: 4px 0;
+            transition: var(--transition-fast);
+        }
+        
+        nav a:hover {
+            color: var(--copper-accent);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--copper-accent);
+            transition: var(--transition-fast);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-item::before {
+            content: attr(data-index);
+            position: absolute;
+            left: -22px;
+            top: 0;
+            color: var(--copper-accent);
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(176, 125, 98, 0.05) 0%, rgba(13, 27, 42, 0) 70%);
+            z-index: -1;
+        }
+        
+        .manifesto-container {
+            max-width: 800px;
+            margin-top: 2rem;
+            padding: 2rem;
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
+            background: rgba(20, 35, 55, 0.4);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .manifesto-container::before {
+            content: '$>';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--copper-accent);
+            font-weight: 500;
+            opacity: 0.7;
+        }
+        
+        .manifesto-text {
+            margin-left: 30px;
+            min-height: 80px;
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: var(--copper-accent);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Posts Grid */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 4rem 0 2rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60%;
+            height: 2px;
+            background: var(--copper-accent);
+        }
+        
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            padding: 0 5% 5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .post-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
+            padding: 1.8rem;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--copper-accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--copper-accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+        }
+        
+        .post-card:hover::before {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+        
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--copper-accent);
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .post-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            transition: var(--transition-fast);
+        }
+        
+        .post-card:hover .post-title {
+            color: var(--copper-accent);
+        }
+        
+        .post-excerpt {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            color: rgba(224, 225, 221, 0.85);
+            line-height: 1.7;
+        }
+        
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border: 1px solid rgba(176, 125, 98, 0.5);
+            border-radius: 3px;
+            transition: var(--transition-fast);
+        }
+        
+        .tag:hover {
+            background: rgba(176, 125, 98, 0.2);
+            border-color: var(--copper-accent);
+        }
+        
+        /* Post View */
+        .post-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            z-index: 2000;
+            padding: 5% 10%;
+            overflow-y: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition-slow);
+        }
+        
+        .post-view.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .post-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
+        }
+        
+        .close-post {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: 1px solid var(--copper-accent);
+            color: var(--copper-accent);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2001;
+        }
+        
+        .close-post:hover {
+            background: rgba(176, 125, 98, 0.15);
+            transform: rotate(90deg);
+        }
+        
+        .post-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(176, 125, 98, 0.3);
+        }
+        
+        .post-view-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        .post-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--copper-accent);
+            margin-top: 0.5rem;
+        }
+        
+        .post-body {
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .post-body p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .post-body code {
+            background: rgba(30, 50, 75, 0.8);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95em;
+            color: var(--copper-accent);
+        }
+        
+        .post-body pre {
+            background: rgba(20, 35, 55, 0.9);
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .post-body blockquote {
+            border-left: 3px solid var(--copper-accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            background: rgba(30, 50, 75, 0.3);
+            font-style: italic;
+            position: relative;
+        }
+        
+        .post-body blockquote::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            font-size: 4rem;
+            color: rgba(176, 125, 98, 0.2);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .post-body th, 
+        .post-body td {
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(176, 125, 98, 0.2);
+            text-align: left;
+        }
+        
+        .post-body th {
+            background: rgba(30, 50, 75, 0.5);
+            font-weight: 500;
+            color: var(--copper-accent);
+        }
+        
+        .post-body tr:nth-child(even) {
+            background: rgba(30, 50, 75, 0.2);
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(176, 125, 98, 0.3);
+        }
+        
+        .comments-container {
+            margin-top: 1.5rem;
+            min-height: 150px;
+            position: relative;
+        }
+        
+        .comments-container.loading::after {
+            content: 'Cargando sistema de comentarios...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--copper-accent);
+            font-style: italic;
+            text-align: center;
+            width: 100%;
+            padding: 1.5rem;
+        }
+        
+        /* Contact Section */
+        .contact-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            z-index: 2000;
+            padding: 5% 10%;
+            overflow-y: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition-slow);
+        }
+        
+        .contact-view.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
+            padding: 3rem;
+        }
+        
+        .contact-form {
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            background: rgba(20, 35, 55, 0.7);
+            border: 1px solid rgba(176, 125, 98, 0.4);
+            border-radius: 4px;
+            color: var(--pearl-gray);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--copper-accent);
+            box-shadow: 0 0 0 3px rgba(176, 125, 98, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: rgba(176, 125, 98, 0.15);
+            color: var(--copper-accent);
+            border: 1px solid var(--copper-accent);
+            padding: 0.8rem 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            background: rgba(176, 125, 98, 0.3);
+        }
+        
+        .disclaimer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(176, 125, 98, 0.3);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            color: rgba(224, 225, 221, 0.85);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 5% 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(176, 125, 98, 0.2);
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: rgba(224, 225, 221, 0.7);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--pearl-gray);
+            text-decoration: none;
+            transition: var(--transition-fast);
+            position: relative;
+            padding: 2px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--copper-accent);
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--copper-accent);
+            transition: var(--transition-fast);
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(176, 125, 98, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(176, 125, 98, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(176, 125, 98, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            nav ul {
+                gap: 1.5rem;
+            }
+            
+            nav a {
+                font-size: 0.85rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .posts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 2rem;
+                padding: 0 3% 4rem;
+            }
+            
+            .hero {
+                padding: 0 3%;
+            }
+            
+            .manifesto-container {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .post-view, .contact-view {
+                padding: 5% 5%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 3%;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1.2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item::before {
+                left: -18px;
+                font-size: 0.75rem;
+            }
+            
+            .hero {
+                min-height: 90vh;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .post-title {
+                font-size: 1.4rem;
+            }
+            
+            .close-post {
+                width: 36px;
+                height: 36px;
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+            
+            .contact-content {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                gap: 0.8rem;
+            }
+            
+            nav a {
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+            
+            .nav-item::before {
+                display: none;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .manifesto-container {
+                font-size: 0.95rem;
+                padding: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .posts-grid {
+                grid-template-columns: 1fr;
+                padding: 0 2% 3rem;
+            }
+            
+            .post-card {
+                padding: 1.5rem;
+            }
+            
+            .post-title {
+                font-size: 1.3rem;
+            }
+            
+            .post-view-title {
+                font-size: 2.3rem;
+            }
+            
+            .post-view, .contact-view {
+                padding: 5% 3%;
+            }
+            
+            .close-post {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor Elements -->
+    <div class="cursor"></div>
+    <div class="cursor-trail"></div>
+    
+    <!-- Header & Navigation -->
+    <header>
+        <a href="#" class="logo">Nexum & Logic</a>
+        <nav>
+            <ul>
+                <li class="nav-item" data-index="01"><a href="#historical">Historical Forensics</a></li>
+                <li class="nav-item" data-index="02"><a href="#intel">5C/2I Intel</a></li>
+                <li class="nav-item" data-index="03"><a href="#logiclab">The Logic Lab</a></li>
+                <li class="nav-item" data-index="04"><a href="#static">Static in Motion</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="pulse">Nexum & Logic</h1>
+        <div class="manifesto-container">
+            <div class="manifesto-text" id="manifesto"></div>
+        </div>
+    </section>
+    
+    <!-- Posts Grid Section -->
+    <main class="posts-section">
+        <h2 class="section-title">Análisis Estratégico</h2>
+        <div class="posts-grid">
+            <!-- Post 1 -->
+            <article class="post-card" data-post="post1">
+                <div class="post-date">2026-01-15</div>
+                <h3 class="post-title">Análisis de Amenazas en Infraestructuras Críticas</h3>
+                <p class="post-excerpt">Evaluación de vectores de ataque emergentes en sistemas SCADA y estrategias de mitigación para proteger activos nacionales esenciales.</p>
+                <div class="post-tags">
+                    <span class="tag">Ciberseguridad</span>
+                    <span class="tag">Infraestructura</span>
+                    <span class="tag">Análisis de Riesgo</span>
+                </div>
+            </article>
+            
+            <!-- Post 2 -->
+            <article class="post-card" data-post="post2">
+                <div class="post-date">2026-01-08</div>
+                <h3 class="post-title">Inteligencia de Señales en el Dominio Cibernético</h3>
+                <p class="post-excerpt">Metodologías avanzadas para la interceptación y análisis de comunicaciones cifradas en entornos de amenazas persistentes avanzadas.</p>
+                <div class="post-tags">
+                    <span class="tag">SIGINT</span>
+                    <span class="tag">Criptografía</span>
+                    <span class="tag">OSINT</span>
+                </div>
+            </article>
+            
+            <!-- Post 3 -->
+            <article class="post-card" data-post="post3">
+                <div class="post-date">2025-12-22</div>
+                <h3 class="post-title">Modelos Predictivos para Ciberoperaciones</h3>
+                <p class="post-excerpt">Implementación de algoritmos de machine learning para anticipar campañas de desinformación y ataques coordinados a gran escala.</p>
+                <div class="post-tags">
+                    <span class="tag">IA</span>
+                    <span class="tag">Predicción</span>
+                    <span class="tag">Estrategia</span>
+                </div>
+            </article>
+            
+            <!-- Post 4 -->
+            <article class="post-card" data-post="post4">
+                <div class="post-date">2025-12-10</div>
+                <h3 class="post-title">Anatomía de un Ataque de Estado-Nación</h3>
+                <p class="post-excerpt">Desglose forense de la campaña Aurora Sentinel, incluyendo tácticas de infiltración, exfiltración de datos y medidas de contrainteligencia.</p>
+                <div class="post-tags">
+                    <span class="tag">APT</span>
+                    <span class="tag">Forense</span>
+                    <span class="tag">Geopolítica</span>
+                </div>
+            </article>
+            
+            <!-- Post 5 -->
+            <article class="post-card" data-post="post5">
+                <div class="post-date">2025-11-28</div>
+                <h3 class="post-title">Resiliencia de Sistemas en Entornos Hostiles</h3>
+                <p class="post-excerpt">Arquitecturas de red descentralizadas y protocolos de comunicación resistentes a la interferencia para operaciones en zonas de conflicto.</p>
+                <div class="post-tags">
+                    <span class="tag">Redes</span>
+                    <span class="tag">Resiliencia</span>
+                    <span class="tag">Protocolos</span>
+                </div>
+            </article>
+            
+            <!-- Post 6 -->
+            <article class="post-card" data-post="post6">
+                <div class="post-date">2025-11-15</div>
+                <h3 class="post-title">Ética en la Ciberinteligencia Moderna</h3>
+                <p class="post-excerpt">Marco normativo para operaciones ofensivas y defensivas en el ciberespacio, equilibrando seguridad nacional y derechos fundamentales.</p>
+                <div class="post-tags">
+                    <span class="tag">Ética</span>
+                    <span class="tag">Política</span>
+                    <span class="tag">Legislación</span>
+                </div>
+            </article>
+        </div>
+    </main>
+    
+    <!-- Post View Template -->
+    <div class="post-view" id="post1-view">
+        <button class="close-post">&times;</button>
+        <div class="post-content">
+            <header class="post-header">
+                <h1 class="post-view-title">Análisis de Amenazas en Infraestructuras Críticas</h1>
+                <div class="post-meta">
+                    <span>2026-01-15</span>
+                    <span>Autor: Dr. Elena Vargas</span>
+                    <span>Categoría: Ciberseguridad Estratégica</span>
+                </div>
+            </header>
+            <div class="post-body">
+                <p>La protección de infraestructuras críticas representa uno de los desafíos más complejos en el panorama de seguridad nacional contemporáneo. Estos sistemas, que incluyen redes eléctricas, sistemas de agua potable, centrales nucleares y redes de transporte, han evolucionado de entornos aislados a ecosistemas interconectados con la internet pública, creando una superficie de ataque sin precedentes.</p>
+                
+                <p>Los actores de amenazas han adaptado sus tácticas para explotar estas vulnerabilidades. El código malicioso <code>Industroyer2</code> demostró la capacidad de manipular directamente dispositivos de protección eléctrica, mientras que campañas como <code>TRITON</code> apuntaron específicamente a sistemas de seguridad funcional en instalaciones industriales.</p>
+                
+                <pre><code>// Ejemplo de análisis de tráfico ICS/SCADA
+function detectAnomalousTraffic(packetFlow) {
+  const baseline = establishBaseline(packetFlow.history);
+  const anomalies = packetFlow.current.filter(packet => 
+    Math.abs(packet.size - baseline.avgSize) > baseline.stdDev * 3 ||
+    packet.destination in criticalAssets &amp;&amp; !inWhitelist(packet.source)
+  );
+  return anomalies.length > threshold ? triggerAlert(anomalies) : null;
+}</code></pre>
+                
+                <p>La matriz de madurez para la seguridad de infraestructuras críticas debe incorporar los siguientes componentes esenciales:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nivel</th>
+                            <th>Capacidad</th>
+                            <th>Indicadores Clave</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 - Inicial</td>
+                            <td>Protección perimetral básica</td>
+                            <td>Firewalls, segmentación rudimentaria</td>
+                        </tr>
+                        <tr>
+                            <td>2 - Defensivo</td>
+                            <td>Monitoreo de anomalías</td>
+                            <td>Sistemas IDS/IPS especializados, análisis de logs</td>
+                        </tr>
+                        <tr>
+                            <td>3 - Proactivo</td>
+                            <td>Simulación de ataques</td>
+                            <td>Red Teams especializados, ejercicios de table-top</td>
+                        </tr>
+                        <tr>
+                            <td>4 - Resiliente</td>
+                            <td>Autodefensa automatizada</td>
+                            <td>Respuesta autónoma a incidentes, sistemas auto-sanadores</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <blockquote>
+                    La ciberseguridad en infraestructuras críticas no es un producto sino un proceso continuo de adaptación. Como señala Rid y McBurney (2023) en su análisis de ciberdeterrencia, "la resiliencia se construye no mediante la prevención absoluta de intrusiones, sino mediante la capacidad de mantener funciones esenciales bajo ataque" (p. 147).
+                </blockquote>
+                
+                <p>Las estrategias de mitigación deben adoptar un enfoque de defensa en profundidad que combine controles técnicos, procedimientos operativos y marcos regulatorios. La segmentación micro-red y la implementación de gateways unidireccionales (data diodes) ofrecen protección para sistemas heredados que no pueden ser parcheados.</p>
+                
+                <p>Finalmente, la colaboración público-privada resulta indispensable dado que aproximadamente el 85% de las infraestructuras críticas en economías avanzadas están en manos de entidades privadas. Mecanismos de intercambio de información de amenazas (TI-ISACs) y ejercicios conjuntos de respuesta a incidentes fortalecen la postura de seguridad colectiva frente a amenazas de alto nivel.</p>
+            </div>
+            
+            <div class="comments-section">
+                <h3>Comentarios y Discusión</h3>
+                <div class="comments-container" id="utterances-post1">
+                    <!-- Utterances se cargará dinámicamente aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contact View -->
+    <div class="contact-view" id="contact-view">
+        <button class="close-post">&times;</button>
+        <div class="contact-content">
+            <h2 class="section-title" style="margin: 0 0 1.5rem; padding-bottom: 0.5rem;">Contacto</h2>
+            <p>Para consultas profesionales, colaboraciones o solicitudes de análisis especializado, complete el formulario a continuación. Responderemos dentro de las 72 horas hábiles.</p>
+            
+            <form class="contact-form" action="mailto:advocatus.ush@gmail.com" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Asunto</label>
+                    <input type="text" id="subject" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea id="message" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">ENVIAR MENSAJE</button>
+            </form>
+            
+            <div class="disclaimer">
+                <p><strong>Política de Privacidad y Protección de Datos:</strong> En Nexum & Logic, valoramos profundamente su privacidad y la protección de su información personal. Este formulario de contacto está diseñado exclusivamente para facilitar la comunicación directa con nuestro equipo editorial y de análisis. Cuando envía un mensaje a través de este formulario, su información (incluyendo nombre, dirección de correo electrónico y contenido del mensaje) se transmite directamente a nuestro buzón institucional (advocatus.ush@gmail.com) sin almacenamiento permanente en servidores intermedios.</p>
+                <p>Queremos dejar absolutamente claro que no recolectamos, almacenamos ni procesamos ninguna información personal más allá de lo estrictamente necesario para responder a su consulta. Su dirección de correo electrónico y otros datos proporcionados nunca serán compartidos, vendidos, alquilados o cedidos a terceros bajo ninguna circunstancia. No utilizamos su información para fines de marketing, perfiles de comportamiento o cualquier otro propósito secundario.</p>
+                <p>Todos los miembros de nuestro equipo están obligados por acuerdos de confidencialidad estrictos. Las comunicaciones se conservan únicamente durante el tiempo necesario para resolver su consulta y posteriormente se eliminan de manera segura. Implementamos medidas técnicas y organizativas robustas para proteger sus datos contra acceso no autorizado, divulgación o destrucción.</p>
+                <p>Al utilizar este formulario, usted acepta que su mensaje será procesado conforme a esta política. Si prefiere contactarnos sin utilizar este formulario, puede enviar un correo electrónico directamente a advocatus.ush@gmail.com. Para cualquier pregunta sobre nuestras prácticas de privacidad, no dude en incluirla en su mensaje.</p>
+                <p>Nuestro compromiso con la transparencia y la ética en el manejo de información sensible es fundamental para nuestra misión de proporcionar inteligencia estratégica de la más alta calidad. Agradecemos su confianza y su interés en Nexum & Logic.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>Nexum & Logic &copy; 2026 | Inteligencia Estratégica para un Mundo Conectado</p>
+        <div class="footer-links">
+            <a href="#" id="contact-link">Contacto</a>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Términos de Uso</a>
+            <a href="https://github.com/nexum-logic" target="_blank">GitHub</a>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ============================================
+            // CONFIGURACIÓN DE UTTERANCES - IMPORTANTE
+            // ============================================
+            // REEMPLAZA ESTE VALOR CON TU REPOSITORIO DE GITHUB
+            // Formato: "tu-usuario/nombre-del-repo"
+            // Ejemplo: "nexum-logic/comments"
+            const UTTERANCES_REPO = "[TU-REPOSITORIO-AQUI]";
+            
+            // ============================================
+            // Función para cargar Utterances dinámicamente
+            // ============================================
+            function loadUtterances(postId) {
+                const container = document.getElementById(`utterances-${postId}`);
+                if (!container) return;
+                
+                // Evitar cargar múltiples veces
+                if (container.hasChildNodes() && container.firstChild.tagName === 'SCRIPT') {
+                    return;
+                }
+                
+                // Mostrar estado de carga
+                container.className = "comments-container loading";
+                
+                // Crear script de Utterances
+                const script = document.createElement('script');
+                script.src = 'https://utteranc.es/client.js';
+                script.setAttribute('repo', UTTERANCES_REPO);
+                script.setAttribute('issue-term', postId);
+                script.setAttribute('theme', 'dark-blue');
+                script.setAttribute('label', 'comentario');
+                script.crossOrigin = 'anonymous';
+                script.async = true;
+                
+                // Limpiar contenedor y agregar script
+                container.innerHTML = '';
+                container.appendChild(script);
+                
+                // Manejar carga exitosa
+                script.onload = () => {
+                    container.classList.remove('loading');
+                    console.log(`Utterances cargado para ${postId}`);
+                };
+                
+                // Manejar errores
+                script.onerror = () => {
+                    container.classList.remove('loading');
+                    container.innerHTML = `
+                        <div style="padding: 1.5rem; background: rgba(100, 30, 30, 0.3); border-left: 3px solid #ff6b6b;">
+                            <p style="margin-bottom: 0.5rem; font-weight: 500;">Error al cargar los comentarios</p>
+                            <p style="font-size: 0.9rem; opacity: 0.9;">Verifica que:</p>
+                            <ul style="font-size: 0.9rem; opacity: 0.9; margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>El repositorio "${UTTERANCES_REPO}" existe en GitHub</li>
+                                <li>La aplicación Utterances está instalada en el repositorio</li>
+                                <li>El valor UTTERANCES_REPO en el código fue actualizado correctamente</li>
+                            </ul>
+                            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                                <a href="https://utteranc.es/" target="_blank" style="color: var(--copper-accent); text-decoration: underline;">
+                                    Configurar Utterances
+                                </a>
+                            </p>
+                        </div>
+                    `;
+                    console.error(`Error cargando Utterances para ${postId}. Verifica la configuración.`);
+                };
+            }
+            
+            // ============================================
+            // Manejadores de eventos
+            // ============================================
+            
+            // Efecto de escritura para el manifiesto
+            const manifestoText = "En un mundo de información omnipresente y amenazas en constante evolución, la inteligencia estratégica trasciende la mera recolección de datos. En Nexum & Logic, fusionamos la rigurosidad académica con la agilidad operativa para transformar señales dispersas en conocimiento accionable. Nuestro enfoque integra metodologías forenses, análisis de patrones y modelización predictiva, siempre guiados por un principio fundamental: la verdad emerge de la intersección entre la lógica implacable y la intuición experta. Este manifiesto representa nuestro compromiso con la claridad en la complejidad, la ética en la operación y la excelencia en cada análisis que publicamos.";
+            const manifestoElement = document.getElementById('manifesto');
+            let index = 0;
+            const typeSpeed = 40;
+            const cursorElement = document.createElement('span');
+            cursorElement.className = 'typing-cursor';
+            manifestoElement.appendChild(cursorElement);
+            
+            function typeWriter() {
+                if (index < manifestoText.length) {
+                    manifestoElement.childNodes[0].nodeValue = manifestoText.substring(0, index + 1);
+                    index++;
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+            setTimeout(typeWriter, 500);
+            
+            // Cursor personalizado con efecto de rastro
+            const cursor = document.querySelector('.cursor');
+            const trailDots = [];
+            const trailCount = 12;
+            
+            // Crear puntos del rastro
+            for (let i = 0; i < trailCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'cursor-trail';
+                dot.style.opacity = 1 - (i / trailCount);
+                dot.style.transform = 'scale(' + (1 - i / (trailCount * 2)) + ')';
+                document.body.appendChild(dot);
+                trailDots.push({
+                    element: dot,
+                    x: 0,
+                    y: 0
+                });
+            }
+            
+            // Seguimiento del movimiento del mouse
+            document.addEventListener('mousemove', (e) => {
+                // Cursor principal
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                // Primer punto del rastro
+                trailDots[0].x = e.clientX;
+                trailDots[0].y = e.clientY;
+                trailDots[0].element.style.left = e.clientX + 'px';
+                trailDots[0].element.style.top = e.clientY + 'px';
+                
+                // Detectar elementos interactivos
+                const interactive = document.querySelectorAll('a, button, .post-card, .tag, .form-control, .submit-btn');
+                let isInteractive = false;
+                
+                interactive.forEach(element => {
+                    if (element.contains(e.target) || element === e.target) {
+                        isInteractive = true;
+                    }
+                });
+                
+                // Efecto en cursor para elementos interactivos
+                if (isInteractive) {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                    cursor.style.backgroundColor = 'rgba(176, 125, 98, 0.7)';
+                } else {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.style.backgroundColor = 'var(--copper-accent)';
+                }
+            });
+            
+            // Animación del rastro
+            function animateTrail() {
+                for (let i = trailDots.length - 1; i > 0; i--) {
+                    const prev = trailDots[i-1];
+                    const current = trailDots[i];
+                    
+                    current.x += (prev.x - current.x) * 0.2;
+                    current.y += (prev.y - current.y) * 0.2;
+                    
+                    current.element.style.left = current.x + 'px';
+                    current.element.style.top = current.y + 'px';
+                }
+                requestAnimationFrame(animateTrail);
+            }
+            animateTrail();
+            
+            // Desactivar cursor personalizado en dispositivos táctiles
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                cursor.style.display = 'none';
+                trailDots.forEach(dot => dot.element.style.display = 'none');
+            }
+            
+            // Abrir vista de post (todos los posts abren el mismo ejemplo con Utterances)
+            document.querySelectorAll('.post-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    // Cerrar todas las vistas abiertas
+                    document.querySelectorAll('.post-view, .contact-view').forEach(view => {
+                        view.classList.remove('active');
+                    });
+                    
+                    // Abrir vista de post
+                    const postView = document.getElementById('post1-view');
+                    postView.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Cargar Utterances para este post
+                    loadUtterances('post1');
+                });
+            });
+            
+            // Cerrar vistas
+            document.querySelectorAll('.close-post').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.post-view, .contact-view').forEach(view => {
+                        view.classList.remove('active');
+                    });
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Abrir formulario de contacto
+            document.getElementById('contact-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.post-view, .contact-view').forEach(view => {
+                    view.classList.remove('active');
+                });
+                document.getElementById('contact-view').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Navegación suave
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        if(targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // ============================================
+            // ADVERTENCIA DE CONFIGURACIÓN
+            // ============================================
+            if (UTTERANCES_REPO === "[TU-REPOSITORIO-AQUI]") {
+                console.warn(
+                    "%c¡ATENCIÓN! Configuración de Utterances pendiente",
+                    "color: #B07D62; font-weight: bold; font-size: 1.2em;",
+                    "\n\nDebes configurar tu repositorio de GitHub en el código:\n" +
+                    "1. Crea un repositorio público en GitHub (ej: 'tu-usuario/nexum-comments')\n" +
+                    "2. Instala la app Utterances: https://github.com/apps/utterances\n" +
+                    "3. En este archivo, busca 'UTTERANCES_REPO' y reemplaza el valor\n" +
+                    "4. Sube los cambios a GitHub Pages\n\n" +
+                    "Más información: https://utteranc.es/"
+                );
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+              <script>
+                                 const UTTERANCES_REPO = "[TU-REPOSITORIO-AQUI]"; // ¡REEMPLAZAR!
+   
+
+              </script>
+                        </body>
+                        </html>
+                    
