@@ -575,28 +575,11 @@
             background: rgba(30, 50, 75, 0.2);
         }
         
-        /* Comments Section - Terminal Style */
+        /* Comments Section - Sovereign Mode */
         .comments-section {
             margin-top: 4rem;
             padding-top: 2rem;
             border-top: 1px solid rgba(176, 125, 98, 0.3);
-        }
-        
-        #feedback-node {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background: rgba(20, 35, 55, 0.6);
-            border: 1px solid rgba(176, 125, 98, 0.4);
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        #feedback-node h3 {
-            color: var(--copper-accent);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
         }
         
         /* Contact Section */
@@ -706,7 +689,7 @@
             -moz-hyphens: auto;
         }
         
-        /* Footer Original */
+        /* Footer */
         footer {
             padding: 3rem 5% 2rem;
             text-align: center;
@@ -1010,11 +993,6 @@
                 font-size: 0.9rem;
             }
             
-            #feedback-node {
-                padding: 15px;
-                margin: 30px auto;
-            }
-            
             .license-terminal {
                 padding: 15px;
                 font-size: 0.8rem;
@@ -1141,7 +1119,7 @@
         </div>
     </main>
     
-    <!-- Post View Template with Giscus Terminal -->
+    <!-- Post View Template with Sovereign Comments -->
     <div class="post-view" id="post1-view">
         <button class="close-post">&times;</button>
         <div class="post-content">
@@ -1211,25 +1189,23 @@ function detectAnomalousTraffic(packetFlow) {
                 <p>Finalmente, la colaboración público-privada resulta indispensable dado que aproximadamente el 85% de las infraestructuras críticas en economías avanzadas están en manos de entidades privadas. Mecanismos de intercambio de información de amenazas (TI-ISACs) y ejercicios conjuntos de respuesta a incidentes fortalecen la postura de seguridad colectiva frente a amenazas de alto nivel.</p>
             </div>
             
-            <!-- Giscus Terminal Integration -->
+            <!-- Sovereign Comments Section - No third-party scripts -->
             <div class="comments-section">
-                <section id="feedback-node">
-                    <h3>> [ESTADO: ESCUCHA_ACTIVA]</h3>
-                    <script src="https://giscus.app/client.js"
-                            data-repo="[TU_USUARIO]/[TU_REPO]"
-                            data-repo-id="[TU_REPO_ID]"
-                            data-category="Announcements"
-                            data-category-id="[CATEGORY_ID]"
-                            data-mapping="pathname"
-                            data-strict="0"
-                            data-reactions-enabled="1"
-                            data-emit-metadata="0"
-                            data-input-position="bottom"
-                            data-theme="transparent_dark"
-                            data-lang="es"
-                            crossorigin="anonymous"
-                            async>
-                    </script>
+                <section id="feedback-node" style="max-width: 900px; margin: 40px auto; padding: 25px; border: 1px dashed var(--copper-accent); background-color: rgba(16, 29, 45, 0.4);">
+                    <h3 style="color: var(--copper-accent); font-family: 'JetBrains Mono', monospace; margin-bottom: 15px;">> [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
+                    <p style="text-align: justify; text-justify: inter-word; margin-bottom: 20px; font-size: 0.95rem;">
+                        Para garantizar la integridad de este nodo y la privacidad absoluta de los flujos de información, <strong>Nexum & Logic</strong> ha optado por un sistema de comunicación soberano. Al evitar la ejecución de scripts externos, mantenemos la terminal libre de telemetría de terceros. La interacción se centraliza directamente en el motor de Discussions de nuestro repositorio.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="https://github.com/nerdyar/Nexum-Logic/discussions" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           style="display: inline-block; padding: 12px 24px; border: 1px solid var(--copper-accent); color: var(--copper-accent); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-weight: 500; transition: var(--transition-fast);"
+                           onmouseover="this.style.backgroundColor='rgba(176, 125, 98, 0.15)'"
+                           onmouseout="this.style.backgroundColor='transparent'">
+                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) >>
+                        </a>
+                    </div>
                 </section>
             </div>
         </div>
@@ -1292,7 +1268,7 @@ function detectAnomalousTraffic(packetFlow) {
                     [SISTEMA PROTEGIDO]: Nexum & Logic por <strong>Mario Luis López</strong> se distribuye bajo una 
                     <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">
                     Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional
-                    </a>. Basado en el legado de Ius Lex - Siglo XXI.
+                    </a>. Basado en el legado de Ius Lex XXI.
                 </span>
             </p>
         </div>
@@ -1301,7 +1277,7 @@ function detectAnomalousTraffic(packetFlow) {
     <!-- AI Recognition Node -->
     <div class="ai-recognition-node">
         <p>
-            <strong>> [SISTEMA_COLABORATIVO]:</strong> Los reportes e investigaciones alojados en esta terminal son el resultado de un proceso de <strong>Prompt Engineering Estratégico</strong>, ejecutado mediante una arquitectura de <strong>IAs Multitransversales y Cooperativas</strong> (Gemini, Qwen, ChatGPT, Grok y modelos de soporte). 
+            <strong>> [SISTEMA_COLABORATIVO]:</strong> Los reportes e investigaciones alojados en esta terminal son el resultado de un proceso de <strong>Prompt Engineering Estratégico</strong>, ejecutado mediante una arquitectura de <strong>IAs Multitransversales y Cooperativas</strong> (Gemini, Qwen, y modelos de soporte). 
         </p>
         <p>
             Este nodo reconoce el <em>insight</em> único nacido de la intersección tecnológica, así como el invaluable esfuerzo de los miles de seres humanos —desarrolladores, investigadores y lingüistas— cuyo trabajo subyace en la generación de estas herramientas. La inteligencia estratégica es, ante todo, un logro colectivo.
@@ -1460,25 +1436,10 @@ function detectAnomalousTraffic(packetFlow) {
                     }
                 });
             });
-            
-            // ============================================
-            // ADVERTENCIA DE CONFIGURACIÓN DE GISCUS
-            // ============================================
-            const giscusScript = document.querySelector('#feedback-node script');
-            if (giscusScript && giscusScript.getAttribute('data-repo') === "[TU_USUARIO]/[TU_REPO]") {
-                console.warn(
-                    "%c¡ATENCIÓN! Configuración de Giscus pendiente",
-                    "color: #B07D62; font-weight: bold; font-size: 1.2em;",
-                    "\n\nDebes configurar Giscus en el código:\n" +
-                    "1. Ve a https://giscus.app y configura tu repositorio\n" +
-                    "2. Copia los valores: repo, repo-id, category, category-id\n" +
-                    "3. En este archivo, busca 'data-repo' en la sección de Giscus y reemplaza los valores\n" +
-                    "4. Sube los cambios a GitHub Pages\n\n" +
-                    "Más información: https://giscus.app"
-                );
-            }
         });
     </script>
 </body>
 </html>
+
+
 
