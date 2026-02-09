@@ -486,6 +486,7 @@
             line-height: 1.2;
             margin-bottom: 1rem;
             text-align: left !important;
+            color: var(--copper-accent);
         }
         
         .post-meta {
@@ -495,6 +496,7 @@
             color: var(--copper-accent);
             margin-top: 0.5rem;
             text-align: left !important;
+            flex-wrap: wrap;
         }
         
         .post-body {
@@ -506,6 +508,17 @@
         .post-body p {
             margin-bottom: 1.5rem;
             text-align: justify !important;
+        }
+        
+        .post-body em {
+            font-style: italic;
+            color: #A9D6E5;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .post-body strong {
+            color: var(--copper-accent);
+            font-weight: 600;
         }
         
         .post-body code {
@@ -580,6 +593,48 @@
             margin-top: 4rem;
             padding-top: 2rem;
             border-top: 1px solid rgba(176, 125, 98, 0.3);
+        }
+        
+        .sovereign-comments {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            border: 1px dashed var(--copper-accent);
+            background-color: rgba(16, 29, 45, 0.4);
+        }
+        
+        .sovereign-comments h3 {
+            color: var(--copper-accent);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .sovereign-comments p {
+            text-align: justify;
+            text-justify: inter-word;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .discussion-link {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 1px solid var(--copper-accent);
+            color: var(--copper-accent);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            background: transparent;
+            margin-top: 10px;
+        }
+        
+        .discussion-link:hover {
+            background-color: rgba(176, 125, 98, 0.15);
+            transform: translateX(5px);
         }
         
         /* Contact Section */
@@ -1002,6 +1057,16 @@
                 padding: 12px;
                 font-size: 0.8rem;
             }
+            
+            .sovereign-comments {
+                padding: 20px 15px;
+            }
+            
+            .discussion-link {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -1041,125 +1106,107 @@
         </div>
     </section>
     
-    <!-- Posts Grid Section -->
+    <!-- Posts Grid Section - SOLO DOS REPORTES REALES -->
     <main class="posts-section">
         <h2 class="section-title">Análisis Estratégico</h2>
         <div class="posts-grid">
-            <!-- Post 1 -->
+            <!-- INTEL_REPORT_01 -->
             <article class="post-card" data-post="post1">
-               <article class="post-card" data-post="post1">
-    <div class="post-date">2026-02-08</div>
-    <h3 class="post-title">[INTEL_REPORT_01]: La Filiación de la Verdad Material</h3>
-    <p class="post-excerpt">Análisis de transición desde la prueba de ADN en 2011 hacia la auditoría de flujos dinámicos en la Argentina de 2026. El rastro de lo instituyente.</p>
-    <div class="post-tags">
-        <span class="tag">Forense</span>
-        <span class="tag">Epistemología</span>
-        <span class="tag">Ius-Lex</span>
-    </div>
-</article>
-            
-            <!-- Post 2 -->
-            <article class="post-card" data-post="post2">
-                <div class="post-date">2026-01-08</div>
-                <h3 class="post-title">Inteligencia de Señales en el Dominio Cibernético</h3>
-                <p class="post-excerpt">Metodologías avanzadas para la interceptación y análisis de comunicaciones cifradas en entornos de amenazas persistentes avanzadas.</p>
+                <div class="post-date">2026-02-08</div>
+                <h3 class="post-title">[INTEL_REPORT_01]: La Filiación de la Verdad Material</h3>
+                <p class="post-excerpt">Análisis de transición desde la prueba de ADN en 2011 hacia la auditoría de flujos dinámicos en la Argentina de 2026. El rastro de lo instituyente.</p>
                 <div class="post-tags">
-                    <span class="tag">SIGINT</span>
-                    <span class="tag">Criptografía</span>
-                    <span class="tag">OSINT</span>
-                </div>
-            </article>
-            
-            <!-- Post 3 -->
-            <article class="post-card" data-post="post3">
-                <div class="post-date">2025-12-22</div>
-                <h3 class="post-title">Modelos Predictivos para Ciberoperaciones</h3>
-                <p class="post-excerpt">Implementación de algoritmos de machine learning para anticipar campañas de desinformación y ataques coordinados a gran escala.</p>
-                <div class="post-tags">
-                    <span class="tag">IA</span>
-                    <span class="tag">Predicción</span>
-                    <span class="tag">Estrategia</span>
-                </div>
-            </article>
-            
-            <!-- Post 4 -->
-            <article class="post-card" data-post="post4">
-                <div class="post-date">2025-12-10</div>
-                <h3 class="post-title">Anatomía de un Ataque de Estado-Nación</h3>
-                <p class="post-excerpt">Desglose forense de la campaña Aurora Sentinel, incluyendo tácticas de infiltración, exfiltración de datos y medidas de contrainteligencia.</p>
-                <div class="post-tags">
-                    <span class="tag">APT</span>
                     <span class="tag">Forense</span>
-                    <span class="tag">Geopolítica</span>
+                    <span class="tag">Epistemología</span>
+                    <span class="tag">Ius-Lex</span>
                 </div>
             </article>
             
-            <!-- Post 5 -->
-            <article class="post-card" data-post="post5">
-                <div class="post-date">2025-11-28</div>
-                <h3 class="post-title">Resiliencia de Sistemas en Entornos Hostiles</h3>
-                <p class="post-excerpt">Arquitecturas de red descentralizadas y protocolos de comunicación resistentes a la interferencia para operaciones en zonas de conflicto.</p>
+            <!-- INTEL_REPORT_02 -->
+            <article class="post-card" data-post="post2">
+                <div class="post-date">2026-02-13</div>
+                <h3 class="post-title">[INTEL_REPORT_02]: Inestabilidad y Carga Ideológica</h3>
+                <p class="post-excerpt">Evaluación del desplome económico argentino: de la pujanza del modelo agroexportador a la inseguridad jurídica contemporánea.</p>
                 <div class="post-tags">
-                    <span class="tag">Redes</span>
-                    <span class="tag">Resiliencia</span>
-                    <span class="tag">Protocolos</span>
-                </div>
-            </article>
-            
-            <!-- Post 6 -->
-            <article class="post-card" data-post="post6">
-                <div class="post-date">2025-11-15</div>
-                <h3 class="post-title">Ética en la Ciberinteligencia Moderna</h3>
-                <p class="post-excerpt">Marco normativo para operaciones ofensivas y defensivas en el ciberespacio, equilibrando seguridad nacional y derechos fundamentales.</p>
-                <div class="post-tags">
-                    <span class="tag">Ética</span>
-                    <span class="tag">Política</span>
-                    <span class="tag">Legislación</span>
+                    <span class="tag">Economía</span>
+                    <span class="tag">Historia</span>
+                    <span class="tag">UNTDF</span>
                 </div>
             </article>
         </div>
     </main>
     
-    <!-- Post View Template with Sovereign Comments -->
+    <!-- Post View Template for INTEL_REPORT_01 -->
     <div class="post-view" id="post1-view">
- <div class="post-view" id="post1-view">
-    <button class="close-post">&times;</button>
-    <div class="post-content">
-        <header class="post-header">
-            <h1 class="post-view-title">> [INTEL_REPORT_01]: DE IUS A NEXUM</h1>
-            <div class="post-meta">
-                <span>08-FEB-2026</span>
-                <span>Origen: RGA-TDF</span>
-                <span>Estado: Desclasificado</span>
+        <button class="close-post">&times;</button>
+        <div class="post-content">
+            <header class="post-header">
+                <h1 class="post-view-title">&gt; [INTEL_REPORT_01]: DE IUS A NEXUM</h1>
+                <div class="post-meta">
+                    <span>08-FEB-2026</span>
+                    <span>Origen: RGA-TDF</span>
+                    <span>Estado: Desclasificado</span>
+                </div>
+            </header>
+            <div class="post-body">
+                <p><em>"...Entre el pasado y el presente hay una filiación tan estrecha, que juzgar el pasado no es otra cosa que ocuparse del presente."</em> — Juan Bautista Alberdi[cite: 3, 4].</p>
+                
+                <p>Argentina duele como un ciclo que se repite en espiral. Tal como señaló Shakespeare en Julio César: <em>"La culpa, querido Bruto, no está en nuestras estrellas, sino en nosotros mismos"</em>. Nuestras crisis no son azar, sino decisiones tomadas en contextos de opacidad.</p>
+
+                <p>En 2011, desde <strong>Ius Lex XXI</strong>, detectamos una señal débil: la fragilidad de la "Verdad Judicial" ante anomalías genéticas como el quimerismo. Esa búsqueda de la <strong>Verdad Material</strong> —la primacía de la realidad sobre las formas— es hoy la base de nuestra auditoría forense digital[cite: 1, 5].</p>
+
+                <p>Lo <strong>instituido</strong> por las élites liberales entre 1880 y 1930 moldeó estructuras sociales que hoy percibimos como naturales, pero es en lo <strong>instituyente</strong> —las prácticas que cuestionan ese orden— donde reside la lógica de la transformación.</p>
             </div>
-        </header>
-        <div class="post-body" style="text-align: justify; text-justify: inter-word;">
-            <p><em>"...Entre el pasado y el presente hay una filiación tan estrecha, que juzgar el pasado no es otra cosa que ocuparse del presente."</em> — Juan Bautista Alberdi[cite: 3, 4].</p>
-            
-            <p>Argentina duele como un ciclo que se repite en espiral. Tal como señaló Shakespeare en Julio César: <em>“La culpa, querido Bruto, no está en nuestras estrellas, sino en nosotros mismos”</em>. Nuestras crisis no son azar, sino decisiones tomadas en contextos de opacidad.</p>
-
-            <p>En 2011, desde <strong>Ius Lex XXI</strong>, detectamos una señal débil: la fragilidad de la "Verdad Judicial" ante anomalías genéticas como el quimerismo. Esa búsqueda de la <strong>Verdad Material</strong> —la primacía de la realidad sobre las formas— es hoy la base de nuestra auditoría forense digital[cite: 1, 5].</p>
-
-            <p>Lo <strong>instituido</strong> por las élites liberales entre 1880 y 1930 moldeó estructuras sociales que hoy percibimos como naturales, pero es en lo <strong>instituyente</strong> —las prácticas que cuestionan ese orden— donde reside la lógica de la transformación.</p>
-        </div>
-    </div>
-</div>
             
             <!-- Sovereign Comments Section - No third-party scripts -->
             <div class="comments-section">
-                <section id="feedback-node" style="max-width: 900px; margin: 40px auto; padding: 25px; border: 1px dashed var(--copper-accent); background-color: rgba(16, 29, 45, 0.4);">
-                    <h3 style="color: var(--copper-accent); font-family: 'JetBrains Mono', monospace; margin-bottom: 15px;">> [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
-                    <p style="text-align: justify; text-justify: inter-word; margin-bottom: 20px; font-size: 0.95rem;">
+                <section class="sovereign-comments">
+                    <h3>&gt; [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
+                    <p>
                         Para garantizar la integridad de este nodo y la privacidad absoluta de los flujos de información, <strong>Nexum & Logic</strong> ha optado por un sistema de comunicación soberano. Al evitar la ejecución de scripts externos, mantenemos la terminal libre de telemetría de terceros. La interacción se centraliza directamente en el motor de Discussions de nuestro repositorio.
                     </p>
                     <div style="text-align: center;">
                         <a href="https://github.com/nerdyar/Nexum-Logic/discussions" 
                            target="_blank" 
                            rel="noopener noreferrer"
-                           style="display: inline-block; padding: 12px 24px; border: 1px solid var(--copper-accent); color: var(--copper-accent); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-weight: 500; transition: var(--transition-fast);"
-                           onmouseover="this.style.backgroundColor='rgba(176, 125, 98, 0.15)'"
-                           onmouseout="this.style.backgroundColor='transparent'">
-                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) >>
+                           class="discussion-link">
+                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) &gt;&gt;
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Post View Template for INTEL_REPORT_02 -->
+    <div class="post-view" id="post2-view">
+        <button class="close-post">&times;</button>
+        <div class="post-content">
+            <header class="post-header">
+                <h1 class="post-view-title">&gt; [INTEL_REPORT_02]: PERSPECTIVA ESPACIO-TEMPORAL</h1>
+                <div class="post-meta">
+                    <span>Fecha: Feb-2026</span>
+                    <span>Materia: Administración General / Perspectiva</span>
+                </div>
+            </header>
+            <div class="post-body">
+                <p>La carga ideológica en lo instituido e instituyente en la República Argentina es una constante que ha impedido un proceso de organización nacional estable. Desde el cénit de la pujanza agroexportadora hasta el presente, los sucesivos cambios de modelo han generado una inseguridad jurídica que asfixia la inversión[cite: 3, 4].</p>
+                <p>Como analizamos en el foro de la UNTDF, el país ha caído en ciclos de endeudamiento y debilidad institucional donde el Congreso, a menudo condicionado, responde a intereses particulares sobre el bien común.</p>
+            </div>
+            
+            <!-- Sovereign Comments Section - No third-party scripts -->
+            <div class="comments-section">
+                <section class="sovereign-comments">
+                    <h3>&gt; [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
+                    <p>
+                        Para garantizar la integridad de este nodo y la privacidad absoluta de los flujos de información, <strong>Nexum & Logic</strong> ha optado por un sistema de comunicación soberano. Al evitar la ejecución de scripts externos, mantenemos la terminal libre de telemetría de terceros. La interacción se centraliza directamente en el motor de Discussions de nuestro repositorio.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="https://github.com/nerdyar/Nexum-Logic/discussions" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="discussion-link">
+                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) &gt;&gt;
                         </a>
                     </div>
                 </section>
@@ -1233,7 +1280,7 @@
     <!-- AI Recognition Node -->
     <div class="ai-recognition-node">
         <p>
-            <strong>> [SISTEMA_COLABORATIVO]:</strong> Los reportes e investigaciones alojados en esta terminal son el resultado de un proceso de <strong>Prompt Engineering Estratégico</strong>, ejecutado mediante una arquitectura de <strong>IAs Multitransversales y Cooperativas</strong> (Gemini, Qwen, ChatGPT, Gork y modelos de soporte). 
+            <strong>&gt; [SISTEMA_COLABORATIVO]:</strong> Los reportes e investigaciones alojados en esta terminal son el resultado de un proceso de <strong>Prompt Engineering Estratégico</strong>, ejecutado mediante una arquitectura de <strong>IAs Multitransversales y Cooperativas</strong> (Gemini, Qwen, ChatGPT, Gork y modelos de soporte). 
         </p>
         <p>
             Este nodo reconoce el <em>insight</em> único nacido de la intersección tecnológica, así como el invaluable esfuerzo de los miles de personas humanas —desarrolladores, investigadores y lingüistas— cuyo trabajo subyace en la generación de estas herramientas. La inteligencia estratégica es, ante todo, un logro colectivo.
@@ -1296,7 +1343,7 @@
                 trailDots[0].element.style.top = e.clientY + 'px';
                 
                 // Detectar elementos interactivos
-                const interactive = document.querySelectorAll('a, button, .post-card, .tag, .form-control, .submit-btn, .main-banner, .cc-icon');
+                const interactive = document.querySelectorAll('a, button, .post-card, .tag, .form-control, .submit-btn, .main-banner, .cc-icon, .discussion-link');
                 let isInteractive = false;
                 
                 interactive.forEach(element => {
@@ -1341,7 +1388,7 @@
             // Manejadores de eventos para posts y contacto
             // ============================================
             
-            // Abrir vista de post
+            // Abrir vista de post específica según data-post
             document.querySelectorAll('.post-card').forEach(card => {
                 card.addEventListener('click', () => {
                     // Cerrar todas las vistas abiertas
@@ -1349,10 +1396,14 @@
                         view.classList.remove('active');
                     });
                     
-                    // Abrir vista de post
-                    const postView = document.getElementById('post1-view');
-                    postView.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+                    // Obtener ID del post y abrir vista correspondiente
+                    const postId = card.getAttribute('data-post');
+                    const postView = document.getElementById(`${postId}-view`);
+                    
+                    if (postView) {
+                        postView.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
                 });
             });
             
@@ -1396,6 +1447,5 @@
     </script>
 </body>
 </html>
-
 
 
