@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +11,7 @@
             --abyss-blue: #0D1B2A;
             --pearl-gray: #E0E1DD;
             --copper-accent: #B07D62;
-            --card-bg: rgba(25, 42, 65, 0.95); /* Un poco más opaco para lectura */
+            --card-bg: rgba(25, 42, 65, 0.7);
             --transition-slow: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-fast: all 0.3s ease;
         }
@@ -27,401 +28,1416 @@
             font-family: 'JetBrains Mono', monospace;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+            padding-top: 5rem;
         }
-
-        /* --- CABECERA (Header) --- */
+        
+        /* Custom Cursor Styles */
+        .cursor {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--copper-accent);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--copper-accent);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            opacity: 0.7;
+        }
+        
+        /* Header & Navigation */
         header {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            padding: 20px 5%;
-            z-index: 1000;
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* Efecto difuminado (Blur) para cuando el texto pasa por detrás */
-            background: rgba(13, 27, 42, 0.85);
+            z-index: 1000;
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(176, 125, 98, 0.1);
+            border-bottom: 1px solid rgba(176, 125, 98, 0.2);
         }
-
+        
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--pearl-gray);
             text-decoration: none;
             letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 4px;
         }
         
-        .logo span { color: var(--copper-accent); }
-
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--copper-accent);
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .logo:hover::after {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+        
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 2.5rem;
         }
         
         nav a {
             color: var(--pearl-gray);
             text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            position: relative;
+            padding: 4px 0;
             transition: var(--transition-fast);
-            cursor: pointer;
         }
         
-        nav a:hover { color: var(--copper-accent); }
-
-        /* --- CONTENEDOR PRINCIPAL --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 20px 50px; /* Padding superior para compensar el header */
+        nav a:hover {
+            color: var(--copper-accent);
         }
-
-        /* --- SECCIÓN DE GRID (Tarjetas) --- */
-        .grid-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 30px;
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--copper-accent);
             transition: var(--transition-fast);
-            cursor: pointer;
-            min-height: 250px;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-item::before {
+            content: attr(data-index);
+            position: absolute;
+            left: -22px;
+            top: 0;
+            color: var(--copper-accent);
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        /* Banner Security Monitor */
+        .banner-container {
+            position: relative;
+            width: 100%;
+            height: 30vh;
+            min-height: 200px;
+            background-color: #0D1B2A;
+            overflow: hidden;
+            border-bottom: 2px solid #B07D62;
+            margin-bottom: 3rem;
+        }
+        
+        .main-banner {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%) contrast(110%) brightness(0.7);
+            transition: filter 0.5s ease;
+        }
+        
+        .main-banner:hover {
+            filter: grayscale(20%) contrast(120%) brightness(0.85);
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(13, 27, 42, 0) 0%, rgba(13, 27, 42, 1) 100%);
+        }
+        
+        .banner-status {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: rgba(176, 125, 98, 0.15);
+            border: 1px solid var(--copper-accent);
+            color: var(--copper-accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse-status 2s infinite;
+        }
+        
+        @keyframes pulse-status {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+            padding: 0 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4rem;
         }
         
-        .card:hover {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(176, 125, 98, 0.05) 0%, rgba(13, 27, 42, 0) 70%);
+            z-index: -1;
+        }
+        
+        .manifesto-container {
+            max-width: 800px;
+            margin-top: 2rem;
+            padding: 2rem;
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
+            background: rgba(20, 35, 55, 0.4);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .manifesto-container::before {
+            content: '$>';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--copper-accent);
+            font-weight: 500;
+            opacity: 0.7;
+        }
+        
+        .manifesto-text {
+            margin-left: 30px;
+            min-height: 80px;
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: var(--copper-accent);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Posts Grid */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 4rem 0 2rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60%;
+            height: 2px;
+            background: var(--copper-accent);
+        }
+        
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            padding: 0 5% 5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .post-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
+            padding: 1.8rem;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .post-card:hover {
             transform: translateY(-5px);
             border-color: var(--copper-accent);
-            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-
-        .card h3 {
+        
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--copper-accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+        }
+        
+        .post-card:hover::before {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+        
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--copper-accent);
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .post-title {
             font-family: 'Playfair Display', serif;
-            margin-bottom: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            transition: var(--transition-fast);
+        }
+        
+        .post-card:hover .post-title {
             color: var(--copper-accent);
         }
-
-        /* --- VISTAS DE CONTENIDO (POSTEOS Y PÁGINAS) --- */
+        
+        .post-excerpt {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            color: rgba(224, 225, 221, 0.85);
+            line-height: 1.7;
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+        }
+        
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border: 1px solid rgba(176, 125, 98, 0.5);
+            border-radius: 3px;
+            transition: var(--transition-fast);
+        }
+        
+        .tag:hover {
+            background: rgba(176, 125, 98, 0.2);
+            border-color: var(--copper-accent);
+        }
+        
+        /* Post View - Texto Justificado */
+        .post-content,
+        .post-body {
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            line-height: 1.6;
+        }
+        
         .post-view {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--abyss-blue);
-            z-index: 900; /* Debajo del Header (1000) pero encima del contenido base */
-            overflow-y: auto; /* Permite scroll */
-            padding: 120px 20px 50px; /* CORRECCIÓN CLAVE: Espacio para que no tape el header */
-            transform: translateY(100%);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(13, 27, 42, 0.95);
+            z-index: 2000;
+            padding: 5% 10%;
+            overflow-y: auto;
             opacity: 0;
-            visibility: hidden;
-        }
-
-        .post-view.active {
-            transform: translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .post-content {
-            max-width: 800px; /* Ancho de lectura óptimo */
-            margin: 0 auto;
-            background: rgba(255,255,255,0.02);
-            padding: 40px;
-            border: 1px solid rgba(176, 125, 98, 0.2);
-        }
-
-        /* Botón de cerrar (La X) */
-        .close-btn {
-            position: fixed; /* Fijo respecto a la ventana */
-            top: 100px; /* Debajo del header */
-            right: 30px; /* A la derecha */
-            font-size: 2rem;
-            color: var(--copper-accent);
-            cursor: pointer;
-            z-index: 1001; /* Encima de todo */
-            transition: var(--transition-fast);
-            background: rgba(13, 27, 42, 0.8);
-            padding: 5px 15px;
-            border-radius: 50%;
+            transform: translateY(20px);
+            transition: var(--transition-slow);
         }
         
-        .close-btn:hover { transform: rotate(90deg); color: #fff; }
-
-        /* Estilos de Tipografía para Artículos */
-        .post-content h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: var(--pearl-gray);
-        }
-
-        .post-meta {
-            font-size: 0.85rem;
-            color: var(--copper-accent);
-            margin-bottom: 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 20px;
+        .post-view.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
-
-        .post-body p {
-            margin-bottom: 25px;
-            font-size: 1.1rem; /* Buen tamaño de lectura */
-            text-align: justify; /* Justificado profesional */
+        
+        .post-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
         }
-
-        .post-body h2 {
-            font-family: 'Playfair Display', serif;
+        
+        .close-post {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: 1px solid var(--copper-accent);
             color: var(--copper-accent);
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            margin-top: 80px;
-            padding: 40px 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            text-align: center;
-            font-size: 0.8rem;
-            color: rgba(224, 225, 221, 0.5);
-        }
-
-        .footer-links {
-            margin-top: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
             display: flex;
             justify-content: center;
-            gap: 20px;
+            align-items: center;
+            z-index: 2001;
         }
-
-        .footer-links a {
+        
+        .close-post:hover {
+            background: rgba(176, 125, 98, 0.15);
+            transform: rotate(90deg);
+        }
+        
+        .post-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(176, 125, 98, 0.3);
+            text-align: left !important;
+        }
+        
+        .post-view-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-align: left !important;
+            color: var(--copper-accent);
+        }
+        
+        .post-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--copper-accent);
+            margin-top: 0.5rem;
+            text-align: left !important;
+            flex-wrap: wrap;
+        }
+        
+        .post-body {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            text-align: justify !important;
+        }
+        
+        .post-body p {
+            margin-bottom: 1.5rem;
+            text-align: justify !important;
+        }
+        
+        .post-body em {
+            font-style: italic;
+            color: #A9D6E5;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .post-body strong {
+            color: var(--copper-accent);
+            font-weight: 600;
+        }
+        
+        .post-body code {
+            background: rgba(30, 50, 75, 0.8);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95em;
+            color: var(--copper-accent);
+        }
+        
+        .post-body pre {
+            background: rgba(20, 35, 55, 0.9);
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-align: left !important;
+        }
+        
+        .post-body blockquote {
+            border-left: 3px solid var(--copper-accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            background: rgba(30, 50, 75, 0.3);
+            font-style: italic;
+            position: relative;
+            text-align: justify !important;
+        }
+        
+        .post-body blockquote::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            font-size: 4rem;
+            color: rgba(176, 125, 98, 0.2);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+            text-align: left !important;
+        }
+        
+        .post-body th, 
+        .post-body td {
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(176, 125, 98, 0.2);
+            text-align: left;
+        }
+        
+        .post-body th {
+            background: rgba(30, 50, 75, 0.5);
+            font-weight: 500;
+            color: var(--copper-accent);
+        }
+        
+        .post-body tr:nth-child(even) {
+            background: rgba(30, 50, 75, 0.2);
+        }
+        
+        /* Comments Section - Sovereign Mode */
+        .comments-section {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(176, 125, 98, 0.3);
+        }
+        
+        .sovereign-comments {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            border: 1px dashed var(--copper-accent);
+            background-color: rgba(16, 29, 45, 0.4);
+        }
+        
+        .sovereign-comments h3 {
+            color: var(--copper-accent);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .sovereign-comments p {
+            text-align: justify;
+            text-justify: inter-word;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .discussion-link {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 1px solid var(--copper-accent);
             color: var(--copper-accent);
             text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            background: transparent;
+            margin-top: 10px;
+        }
+        
+        .discussion-link:hover {
+            background-color: rgba(176, 125, 98, 0.15);
+            transform: translateX(5px);
+        }
+        
+        /* Contact Section */
+        .contact-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            z-index: 2000;
+            padding: 5% 10%;
+            overflow-y: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition-slow);
+        }
+        
+        .contact-view.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid rgba(176, 125, 98, 0.3);
+            border-radius: 4px;
+            padding: 3rem;
+        }
+        
+        .contact-form {
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-align: justify;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            background: rgba(20, 35, 55, 0.7);
+            border: 1px solid rgba(176, 125, 98, 0.4);
+            border-radius: 4px;
+            color: var(--pearl-gray);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
             transition: var(--transition-fast);
         }
-
-        .footer-links a:hover { text-decoration: underline; }
-
-        /* Media Queries para Móvil */
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--copper-accent);
+            box-shadow: 0 0 0 3px rgba(176, 125, 98, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: rgba(176, 125, 98, 0.15);
+            color: var(--copper-accent);
+            border: 1px solid var(--copper-accent);
+            padding: 0.8rem 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            background: rgba(176, 125, 98, 0.3);
+        }
+        
+        .disclaimer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(176, 125, 98, 0.3);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            color: rgba(224, 225, 221, 0.85);
+        }
+        
+        .disclaimer p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 5% 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(176, 125, 98, 0.2);
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: rgba(224, 225, 221, 0.7);
+        }
+        
+        footer p {
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--pearl-gray);
+            text-decoration: none;
+            transition: var(--transition-fast);
+            position: relative;
+            padding: 2px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--copper-accent);
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--copper-accent);
+            transition: var(--transition-fast);
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* License Terminal Footer */
+        .license-terminal {
+            background-color: rgba(13, 27, 42, 0.9);
+            border-top: 1px solid #B07D62;
+            color: #E0E1DD;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+        
+        .license-content p {
+            text-align: justify;
+            text-justify: inter-word;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .cc-icon {
+            height: 31px;
+            filter: sepia(1) saturate(2) hue-rotate(-10deg) brightness(0.8);
+            transition: filter 0.3s ease;
+        }
+        
+        .cc-icon:hover {
+            filter: none;
+        }
+        
+        .license-terminal a {
+            color: #B07D62;
+            text-decoration: none;
+            border-bottom: 1px dashed #B07D62;
+        }
+        
+        /* AI Recognition Node */
+        .ai-recognition-node {
+            margin-top: 20px;
+            padding: 15px;
+            border-left: 3px solid #B07D62;
+            background-color: rgba(16, 29, 45, 0.5);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        
+        .ai-recognition-node p {
+            text-align: justify;
+            text-justify: inter-word;
+            color: #A9D6E5;
+            margin-bottom: 10px;
+        }
+        
+        .ai-recognition-node strong {
+            color: #B07D62;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(176, 125, 98, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(176, 125, 98, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(176, 125, 98, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            body {
+                padding-top: 4.5rem;
+            }
+            
+            .banner-container {
+                height: 25vh;
+                min-height: 180px;
+            }
+            
+            nav ul {
+                gap: 1.5rem;
+            }
+            
+            nav a {
+                font-size: 0.85rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .posts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 2rem;
+                padding: 0 3% 4rem;
+            }
+            
+            .hero {
+                padding: 0 3%;
+                min-height: 65vh;
+            }
+            
+            .manifesto-container {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .post-view, .contact-view {
+                padding: 5% 5%;
+            }
+            
+            .license-content p {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .post-content { padding: 20px; }
-            .post-content h1 { font-size: 1.8rem; }
-            .close-btn { top: 85px; right: 15px; font-size: 1.5rem; }
-            nav ul { gap: 15px; }
-            nav a { font-size: 0.75rem; }
+            body {
+                padding-top: 4rem;
+            }
+            
+            header {
+                padding: 1rem 3%;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1.2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item::before {
+                left: -18px;
+                font-size: 0.75rem;
+            }
+            
+            .banner-container {
+                height: 22vh;
+                min-height: 160px;
+            }
+            
+            .banner-status {
+                top: 0.75rem;
+                right: 1rem;
+                font-size: 0.8rem;
+                padding: 0.2rem 0.6rem;
+            }
+            
+            .hero {
+                min-height: 60vh;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .post-title {
+                font-size: 1.4rem;
+            }
+            
+            .close-post {
+                width: 36px;
+                height: 36px;
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+            
+            .contact-content {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding-top: 3.5rem;
+            }
+            
+            nav ul {
+                gap: 0.8rem;
+            }
+            
+            nav a {
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+            
+            .nav-item::before {
+                display: none;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .banner-container {
+                height: 20vh;
+                min-height: 140px;
+            }
+            
+            .banner-status {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .manifesto-container {
+                font-size: 0.95rem;
+                padding: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .posts-grid {
+                grid-template-columns: 1fr;
+                padding: 0 2% 3rem;
+            }
+            
+            .post-card {
+                padding: 1.5rem;
+            }
+            
+            .post-title {
+                font-size: 1.3rem;
+            }
+            
+            .post-view-title {
+                font-size: 2.3rem;
+            }
+            
+            .post-view, .contact-view {
+                padding: 5% 3%;
+            }
+            
+            .close-post {
+                width: 32px;
+                height: 32px;
+            }
+            
+            footer p {
+                font-size: 0.9rem;
+            }
+            
+            .license-terminal {
+                padding: 15px;
+                font-size: 0.8rem;
+            }
+            
+            .ai-recognition-node {
+                padding: 12px;
+                font-size: 0.8rem;
+            }
+            
+            .sovereign-comments {
+                padding: 20px 15px;
+            }
+            
+            .discussion-link {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-
+    <!-- Custom Cursor Elements -->
+    <div class="cursor"></div>
+    <div class="cursor-trail"></div>
+    
+    <!-- Header & Navigation -->
     <header>
-        <a href="#" class="logo">Nexum <span>&</span> Logic</a>
+        <a href="#" class="logo">Nexum & Logic</a>
         <nav>
             <ul>
-                <li><a href="#inicio" onclick="closeAllViews()">Inicio</a></li>
-                <li><a href="#" onclick="openView('view-forensics')">Forensics</a></li>
-                <li><a href="#" onclick="openView('view-intel')">Intel</a></li>
-                <li><a href="#" id="contact-link">Contacto</a></li>
+                <li class="nav-item" data-index="01"><a href="#historical">Análisis Histórico</a></li>
+                <li class="nav-item" data-index="02"><a href="#intel">Inteligencia 5C/2I</a></li>
+                <li class="nav-item" data-index="03"><a href="#logiclab">Laboratorio Lógico</a></li>
+                <li class="nav-item" data-index="04"><a href="#static">Estática en Movimiento</a></li>
             </ul>
         </nav>
     </header>
-
-    <div class="container" id="inicio">
-        
-        <div style="margin-bottom: 80px; text-align: center;">
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px;">
-                Inteligencia Estratégica
-            </h1>
-            <p style="max-width: 600px; margin: 0 auto; color: var(--copper-accent);">
-                Auditoría Forense • Ciberseguridad • Análisis de Datos
-            </p>
+    
+    <!-- Security Monitor Banner -->
+    <div class="banner-container">
+        <img src="banner_nexum.webp" alt="Monitor de Seguridad Institucional" class="main-banner">
+        <div class="banner-overlay"></div>
+        <div class="banner-status">
+            <span class="status-dot"></span>
+            CONEXIÓN SEGURA • MONITOREO ACTIVO
         </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="pulse">Nexum & Logic</h1>
+        <div class="manifesto-container">
+            <div class="manifesto-text" id="manifesto"></div>
+        </div>
+    </section>
+    
+    <!-- Posts Grid Section - SOLO DOS REPORTES REALES -->
+    <main class="posts-section">
+        <h2 class="section-title">Análisis Estratégico</h2>
+        <div class="posts-grid">
+            <!-- INTEL_REPORT_01 -->
+            <article class="post-card" data-post="post1">
+                <div class="post-date">2026-02-08</div>
+                <h3 class="post-title">[INFORME_01]: La Filiación de la Verdad Material</h3>
+                <p class="post-excerpt">Análisis de transición desde metodologías forenses iniciales hacia auditorías de flujos dinámicos en Argentina. El rastro de lo instituyente en contextos de transformación.</p>
+                <div class="post-tags">
+                    <span class="tag">Auditoría</span>
+                    <span class="tag">Epistemología</span>
+                    <span class="tag">Ius-Lex</span>
+                </div>
+            </article>
+            
+            <!-- INTEL_REPORT_02 -->
+            <article class="post-card" data-post="post2">
+                <div class="post-date">2026-02-13</div>
+                <h3 class="post-title">[INFORME_02]: Estabilidad e Influencias Conceptuales</h3>
+                <p class="post-excerpt">Evaluación de la evolución económica argentina: del modelo agroexportador a la certeza regulatoria contemporánea. Análisis de ciclos institucionales y su impacto en la inversión.</p>
+                <div class="post-tags">
+                    <span class="tag">Economía</span>
+                    <span class="tag">Historia</span>
+                    <span class="tag">UNTDF</span>
+                </div>
+            </article>
+        </div>
+    </main>
+    
+    <!-- Post View Template for INFORME_01 -->
+    <div class="post-view" id="post1-view">
+        <button class="close-post">&times;</button>
+        <div class="post-content">
+            <header class="post-header">
+                <h1 class="post-view-title">&gt; [INFORME_01]: DE IUS A NEXUM</h1>
+                <div class="post-meta">
+                    <span>08-FEB-2026</span>
+                    <span>Origen: RGA-TDF</span>
+                    <span>Estado: Desclasificado</span>
+                </div>
+            </header>
+            <div class="post-body">
+                <p><em>"...Entre el pasado y el presente hay una filiación tan estrecha, que juzgar el pasado no es otra cosa que ocuparse del presente."</em> — Juan Bautista Alberdi[cite: 3, 4].</p>
+                
+                <p>Argentina enfrenta desafíos recurrentes que se manifiestan en ciclos económicos. Tal como señaló Shakespeare en Julio César: <em>"La culpa, querido Bruto, no está en nuestras estrellas, sino en nosotros mismos"</em>. Estos desafíos no son producto del azar, sino de decisiones tomadas en contextos de falta de transparencia.</p>
 
-        <div class="grid-section">
-            <div class="card" onclick="openView('view-forensics')">
-                <h3>Historical Forensics</h3>
-                <p>Análisis retrospectivo y reconstrucción de eventos digitales críticos.</p>
+                <p>En 2011, desde <strong>Ius Lex XXI</strong>, detectamos una señal débil: la fragilidad de la "Verdad Contable" ante irregularidades en los registros. Esa búsqueda de la <strong>Verdad Material</strong> —la primacía de la realidad sobre las formas— es hoy la base de nuestra auditoría forense digital[cite: 1, 5].</p>
+
+                <p>Lo <strong>instituido</strong> por las élites liberales entre 1880 y 1930 moldeó estructuras sociales que hoy percibimos como naturales, pero es en lo <strong>instituyente</strong> —las prácticas que cuestionan ese orden— donde reside la lógica de la transformación.</p>
             </div>
-
-            <div class="card" onclick="openView('view-intel')">
-                <h3>5C/2I Intel</h3>
-                <p>Inteligencia de Amenazas y Contrainteligencia Corporativa.</p>
-            </div>
-
-            <div class="card" onclick="openView('view-logic')">
-                <h3>The Logic Lab</h3>
-                <p>Laboratorio de lógica aplicada a la seguridad defensiva.</p>
-            </div>
-
-            <div class="card" onclick="openView('view-static')">
-                <h3>Static in Motion</h3>
-                <p>Análisis de malware estático y dinámico en entornos controlados.</p>
+            
+            <!-- Sovereign Comments Section - No third-party scripts -->
+            <div class="comments-section">
+                <section class="sovereign-comments">
+                    <h3>&gt; [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
+                    <p>
+                        Para garantizar la integridad de este nodo y la privacidad absoluta de los flujos de información, <strong>Nexum & Logic</strong> ha optado por un sistema de comunicación soberano. Al evitar la ejecución de scripts externos, mantenemos la terminal libre de telemetría de terceros. La interacción se centraliza directamente en el motor de Discussions de nuestro repositorio.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="https://github.com/nerdyar/Nexum-Logic/discussions" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="discussion-link">
+                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) &gt;&gt;
+                        </a>
+                    </div>
+                </section>
             </div>
         </div>
-
     </div>
-
-    <div id="view-forensics" class="post-view">
-        <div class="close-btn" onclick="closeAllViews()">×</div>
-        <article class="post-content">
-            <h1>Historical Forensics</h1>
-            <span class="post-meta">Categoría: Auditoría • Lectura: 7 min</span>
+    
+    <!-- Post View Template for INFORME_02 -->
+    <div class="post-view" id="post2-view">
+        <button class="close-post">&times;</button>
+        <div class="post-content">
+            <header class="post-header">
+                <h1 class="post-view-title">&gt; [INFORME_02]: PERSPECTIVA ESPACIO-TEMPORAL</h1>
+                <div class="post-meta">
+                    <span>Fecha: Feb-2026</span>
+                    <span>Materia: Administración General / Perspectiva</span>
+                </div>
+            </header>
             <div class="post-body">
-                <p><strong>Introducción a la Forense Histórica</strong></p>
-                <p>En el ámbito de la ciberseguridad, comprender el pasado es fundamental para asegurar el futuro. Historical Forensics no se trata solo de recuperar datos, sino de reconstruir narrativas complejas a partir de fragmentos digitales dispersos.</p>
-                <p>(Espacio reservado para contenido técnico de 1000-1500 palabras. Aquí iría el análisis profundo sobre metodologías de recuperación, cadena de custodia y análisis de líneas de tiempo en incidentes pasados).</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <h2>Metodología</h2>
-                <p>El proceso comienza con la identificación de fuentes de datos volátiles y no volátiles...</p>
+                <p>Las influencias conceptuales en lo instituido e instituyente en la República Argentina han representado un desafío para la estabilidad organizativa nacional. Desde el cénit de la pujanza agroexportadora hasta el presente, los sucesivos cambios de modelo han generado una certeza regulatoria que fortalece la inversión[cite: 3, 4].</p>
+                <p>Como analizamos en el foro de la UNTDF, el país ha transitado ciclos de consolidación institucional donde el Congreso, en armonía con el interés general, prioriza el bien común sobre intereses sectoriales.</p>
             </div>
-        </article>
-    </div>
-
-    <div id="view-intel" class="post-view">
-        <div class="close-btn" onclick="closeAllViews()">×</div>
-        <article class="post-content">
-            <h1>5C/2I Intelligence</h1>
-            <span class="post-meta">Categoría: Inteligencia • Lectura: 8 min</span>
-            <div class="post-body">
-                <p><strong>Comando, Control, Comunicaciones, Computadoras y Cyber (5C)</strong></p>
-                <p>La integración de inteligencia e investigación (2I) en los sistemas modernos requiere una visión holística. Este marco de trabajo permite a las organizaciones anticiparse a amenazas persistentes avanzadas (APT).</p>
-                <p>(Espacio reservado para desarrollo del marco teórico 5C/2I y su aplicación en la defensa activa).</p>
+            
+            <!-- Sovereign Comments Section - No third-party scripts -->
+            <div class="comments-section">
+                <section class="sovereign-comments">
+                    <h3>&gt; [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
+                    <p>
+                        Para garantizar la integridad de este nodo y la privacidad absoluta de los flujos de información, <strong>Nexum & Logic</strong> ha optado por un sistema de comunicación soberano. Al evitar la ejecución de scripts externos, mantenemos la terminal libre de telemetría de terceros. La interacción se centraliza directamente en el motor de Discussions de nuestro repositorio.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="https://github.com/nerdyar/Nexum-Logic/discussions" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="discussion-link">
+                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) &gt;&gt;
+                        </a>
+                    </div>
+                </section>
             </div>
-        </article>
+        </div>
     </div>
-
-    <div id="view-logic" class="post-view">
-        <div class="close-btn" onclick="closeAllViews()">×</div>
-        <article class="post-content">
-            <h1>The Logic Lab</h1>
-            <span class="post-meta">Categoría: R&D • Lectura: 5 min</span>
-            <div class="post-body">
-                <p>Bienvenido al laboratorio de lógica. Aquí desglosamos algoritmos de defensa y estudiamos patrones de ataque desde una perspectiva matemática y conductual.</p>
-            </div>
-        </article>
-    </div>
-
-    <div id="view-static" class="post-view">
-        <div class="close-btn" onclick="closeAllViews()">×</div>
-        <article class="post-content">
-            <h1>Static in Motion</h1>
-            <span class="post-meta">Categoría: Malware Analysis • Lectura: 9 min</span>
-            <div class="post-body">
-                <p>El análisis de código estático frente a la ejecución dinámica. ¿Cómo se comportan los binarios cuando creen que nadie los observa?</p>
-                <p>(Espacio para análisis técnico detallado).</p>
-            </div>
-        </article>
-    </div>
-
-    <div id="contact-view" class="post-view">
-        <div class="close-btn" onclick="closeAllViews()">×</div>
-        <div class="post-content" style="text-align: center;">
-            <h1>Contacto Seguro</h1>
-            <p style="margin-bottom: 30px;">Canal de comunicación encriptado (Simulación)</p>
-            <form style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
-                <input type="email" placeholder="ID de Correo" style="padding: 15px; background: transparent; border: 1px solid var(--copper-accent); color: white;">
-                <textarea rows="5" placeholder="Mensaje encriptado..." style="padding: 15px; background: transparent; border: 1px solid var(--copper-accent); color: white;"></textarea>
-                <button type="submit" style="padding: 15px; background: var(--copper-accent); border: none; color: white; cursor: pointer; font-weight: bold;">TRANSMITIR</button>
+    
+    <!-- Contact View -->
+    <div class="contact-view" id="contact-view">
+        <button class="close-post">&times;</button>
+        <div class="contact-content">
+            <h2 class="section-title" style="margin: 0 0 1.5rem; padding-bottom: 0.5rem;">Contacto</h2>
+            <p>Para consultas profesionales, colaboraciones o solicitudes de análisis especializado, complete el formulario a continuación. Responderemos dentro de las 72 horas hábiles.</p>
+            
+            <form class="contact-form" action="mailto:advocatus.ush@gmail.com" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Asunto</label>
+                    <input type="text" id="subject" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea id="message" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">ENVIAR MENSAJE</button>
             </form>
+            
+            <div class="disclaimer">
+                <p><strong>Política de Privacidad y Protección de Datos:</strong> En Nexum & Logic, valoramos profundamente su privacidad y la protección de su información personal. Este formulario de contacto está diseñado exclusivamente para facilitar la comunicación directa con nuestro equipo editorial y de análisis. Cuando envía un mensaje a través de este formulario, su información (incluyendo nombre, dirección de correo electrónico y contenido del mensaje) se transmite directamente a nuestro buzón institucional (advocatus.ush@gmail.com) sin almacenamiento permanente en servidores intermedios.</p>
+                <p>Queremos dejar absolutamente claro que no recolectamos, almacenamos ni procesamos ninguna información personal más allá de lo estrictamente necesario para responder a su consulta. Su dirección de correo electrónico y otros datos proporcionados nunca serán compartidos, vendidos, alquilados o cedidos a terceros bajo ninguna circunstancia. No utilizamos su información para fines de marketing, perfiles de comportamiento o cualquier otro propósito secundario.</p>
+                <p>Todos los miembros de nuestro equipo están obligados por acuerdos de confidencialidad estrictos. Las comunicaciones se conservan únicamente durante el tiempo necesario para resolver su consulta y posteriormente se eliminan de manera segura. Implementamos medidas técnicas y organizativas robustas para proteger sus datos contra acceso no autorizado, divulgación o destrucción.</p>
+                <p>Al utilizar este formulario, usted acepta que su mensaje será procesado conforme a esta política. Si prefiere contactarnos sin utilizar este formulario, puede enviar un correo electrónico directamente a advocatus.ush@gmail.com. Para cualquier pregunta sobre nuestras prácticas de privacidad, no dude en incluirla en su mensaje.</p>
+                <p>Nuestro compromiso con la transparencia y la ética en el manejo de información sensible es fundamental para nuestra misión de proporcionar inteligencia estratégica de la más alta calidad. Agradecemos su confianza y su interés en Nexum & Logic.</p>
+            </div>
         </div>
     </div>
-
-    <div id="view-privacy" class="post-view">
-        <div class="close-btn" onclick="closeAllViews()">×</div>
-        <article class="post-content">
-            <h1>Política de Privacidad</h1>
-            <span class="post-meta">Última actualización: Febrero 2026</span>
-            <div class="post-body">
-                <p>En Nexum & Logic, la privacidad y la seguridad de la información son los pilares fundamentales de nuestra operación. Esta política describe cómo gestionamos, protegemos y, en circunstancias limitadas, procesamos la información digital.</p>
-                <h2>1. Recolección de Datos</h2>
-                <p>No utilizamos cookies de rastreo invasivas. Nuestra recolección de datos se limita estrictamente a los registros de servidor estándar necesarios para la ciberseguridad defensiva y el mantenimiento de la integridad del sitio.</p>
-                <h2>2. Uso de la Información</h2>
-                <p>Cualquier información proporcionada voluntariamente a través de nuestros canales de contacto se trata con el nivel de clasificación "Confidencial". No compartimos, vendemos ni distribuimos datos a terceros bajo ninguna circunstancia, salvo orden judicial competente.</p>
-                <h2>3. Seguridad</h2>
-                <p>Implementamos protocolos de encriptación estándar y medidas de seguridad ofensiva/defensiva para proteger nuestra infraestructura. Sin embargo, el usuario reconoce que ninguna transmisión por internet es 100% segura.</p>
-            </div>
-        </article>
-    </div>
-
-    <div id="view-terms" class="post-view">
-        <div class="close-btn" onclick="closeAllViews()">×</div>
-        <article class="post-content">
-            <h1>Términos de Uso</h1>
-            <span class="post-meta">Vigencia: Global</span>
-            <div class="post-body">
-                <p>El acceso y uso de los recursos de Nexum & Logic implica la aceptación plena de los siguientes términos. Este sitio está destinado a fines educativos, de consultoría y divulgación técnica.</p>
-                <h2>1. Propiedad Intelectual</h2>
-                <p>Todo el código, análisis, informes forenses y contenido visual presentados son propiedad intelectual de Nexum & Logic, a menos que se indique lo contrario (como librerías open source).</p>
-                <h2>2. Uso Aceptable</h2>
-                <p>Está estrictamente prohibido utilizar la información técnica aquí provista para actividades ilícitas, ataques cibernéticos no autorizados o cualquier forma de violación de la ley vigente.</p>
-            </div>
-        </article>
-    </div>
-
+    
+    <!-- Footer Original -->
     <footer>
-        <p>© 2026 Nexum & Logic. Todos los derechos reservados.</p>
+        <p>Nexum & Logic © 2026 | Inteligencia Estratégica para un Mundo Conectado. Publicamos análisis rigurosos sobre economía, finanzas y seguridad institucional. Nuestro enfoque combina metodologías académicas con operaciones de campo para ofrecer perspectivas únicas en el panorama del análisis estratégico global.</p>
         <div class="footer-links">
-            <a href="#" onclick="openView('view-privacy')">Política de Privacidad</a>
-            <a href="#" onclick="openView('view-terms')">Términos de Uso</a>
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="#" id="contact-link">Contacto</a>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Términos de Uso</a>
+            <a href="https://github.com/nexum-logic" target="_blank">GitHub</a>
         </div>
     </footer>
-
+    
+    <!-- License Terminal Footer -->
+    <footer class="license-terminal">
+        <div class="license-content">
+            <p>
+                <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc-sa.svg" alt="Creative Commons License" class="cc-icon">
+                <span>
+                    [SISTEMA PROTEGIDO]: Nexum & Logic por <strong>Mario Luis López</strong> se distribuye bajo una 
+                    <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">
+                    Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional
+                    </a>. Basado en el legado de Ius Lex - Siglo XXI.
+                </span>
+            </p>
+        </div>
+    </footer>
+    
+    <!-- AI Recognition Node -->
+    <div class="ai-recognition-node">
+        <p>
+            <strong>&gt; [SISTEMA_COLABORATIVO]:</strong> Los reportes e investigaciones alojados en esta terminal son el resultado de un proceso de <strong>Ingeniería de Prompt Estratégico</strong>, ejecutado mediante una arquitectura de <strong>Sistemas de IA Multitransversales y Cooperativos</strong> (Gemini, Qwen, ChatGPT, Grok y modelos de soporte). 
+        </p>
+        <p>
+            Este nodo reconoce el <em>insight</em> único nacido de la intersección tecnológica, así como el invaluable esfuerzo de las personas —desarrolladores, investigadores y lingüistas— cuyo trabajo sustenta estas herramientas. La inteligencia estratégica es, ante todo, un logro colectivo.
+        </p>
+    </div>
+    
     <script>
-        // Función maestra para abrir cualquier vista por su ID
-        function openView(viewId) {
-            // 1. Cerrar cualquier vista activa primero
-            closeAllViews();
-            
-            // 2. Seleccionar la vista deseada
-            const view = document.getElementById(viewId);
-            if (view) {
-                view.classList.add('active');
-                // Bloquear el scroll del cuerpo principal para que solo scrollee la vista
-                document.body.style.overflow = 'hidden'; 
-            }
-        }
-
-        // Función para cerrar todas las vistas y volver al inicio
-        function closeAllViews() {
-            document.querySelectorAll('.post-view').forEach(view => {
-                view.classList.remove('active');
-            });
-            // Restaurar el scroll de la página principal
-            document.body.style.overflow = 'auto';
-        }
-
-        // Event Listeners adicionales al cargar
         document.addEventListener('DOMContentLoaded', () => {
+            // ============================================
+            // Efecto de escritura para el manifiesto (SANITIZADO)
+            // ============================================
+            const manifestoText = "En la intersección del dato estático y el flujo dinámico, la verdad emerge mediante la lógica. Nexum & Logic es un nodo de inteligencia estratégica dedicado a la decodificación de patrones complejos en economía, finanzas y seguridad institucional. Nuestra misión es transformar datos crudos en inteligencia operativa mediante metodologías innovadoras (5C/2I), evolucionando el legado de Ius Lex - Siglo XXI hacia la soberanía del conocimiento. Operamos desde el Hinterland de Tierra del Fuego, Argentina, con rigor académico y transparencia radical.";
+            const manifestoElement = document.getElementById('manifesto');
+            let index = 0;
+            const typeSpeed = 40;
+            const cursorElement = document.createElement('span');
+            cursorElement.className = 'typing-cursor';
+            manifestoElement.appendChild(cursorElement);
             
-            // Listener específico para el botón de contacto del menú
+            function typeWriter() {
+                if (index < manifestoText.length) {
+                    manifestoElement.childNodes[0].nodeValue = manifestoText.substring(0, index + 1);
+                    index++;
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+            setTimeout(typeWriter, 500);
+            
+            // ============================================
+            // Cursor personalizado con efecto de rastro
+            // ============================================
+            const cursor = document.querySelector('.cursor');
+            const trailDots = [];
+            const trailCount = 12;
+            
+            // Crear puntos del rastro
+            for (let i = 0; i < trailCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'cursor-trail';
+                dot.style.opacity = 1 - (i / trailCount);
+                dot.style.transform = 'scale(' + (1 - i / (trailCount * 2)) + ')';
+                document.body.appendChild(dot);
+                trailDots.push({
+                    element: dot,
+                    x: 0,
+                    y: 0
+                });
+            }
+            
+            // Seguimiento del movimiento del mouse
+            document.addEventListener('mousemove', (e) => {
+                // Cursor principal
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                // Primer punto del rastro
+                trailDots[0].x = e.clientX;
+                trailDots[0].y = e.clientY;
+                trailDots[0].element.style.left = e.clientX + 'px';
+                trailDots[0].element.style.top = e.clientY + 'px';
+                
+                // Detectar elementos interactivos
+                const interactive = document.querySelectorAll('a, button, .post-card, .tag, .form-control, .submit-btn, .main-banner, .cc-icon, .discussion-link');
+                let isInteractive = false;
+                
+                interactive.forEach(element => {
+                    if (element.contains(e.target) || element === e.target) {
+                        isInteractive = true;
+                    }
+                });
+                
+                // Efecto en cursor para elementos interactivos
+                if (isInteractive) {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                    cursor.style.backgroundColor = 'rgba(176, 125, 98, 0.7)';
+                } else {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.style.backgroundColor = 'var(--copper-accent)';
+                }
+            });
+            
+            // Animación del rastro
+            function animateTrail() {
+                for (let i = trailDots.length - 1; i > 0; i--) {
+                    const prev = trailDots[i-1];
+                    const current = trailDots[i];
+                    
+                    current.x += (prev.x - current.x) * 0.2;
+                    current.y += (prev.y - current.y) * 0.2;
+                    
+                    current.element.style.left = current.x + 'px';
+                    current.element.style.top = current.y + 'px';
+                }
+                requestAnimationFrame(animateTrail);
+            }
+            animateTrail();
+            
+            // Desactivar cursor personalizado en dispositivos táctiles
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                cursor.style.display = 'none';
+                trailDots.forEach(dot => dot.element.style.display = 'none');
+            }
+            
+            // ============================================
+            // Manejadores de eventos para posts y contacto
+            // ============================================
+            
+            // Abrir vista de post específica según data-post
+            document.querySelectorAll('.post-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    // Cerrar todas las vistas abiertas
+                    document.querySelectorAll('.post-view, .contact-view').forEach(view => {
+                        view.classList.remove('active');
+                    });
+                    
+                    // Obtener ID del post y abrir vista correspondiente
+                    const postId = card.getAttribute('data-post');
+                    const postView = document.getElementById(`${postId}-view`);
+                    
+                    if (postView) {
+                        postView.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+            
+            // Cerrar vistas
+            document.querySelectorAll('.close-post').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.post-view, .contact-view').forEach(view => {
+                        view.classList.remove('active');
+                    });
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Abrir formulario de contacto
             document.getElementById('contact-link').addEventListener('click', (e) => {
                 e.preventDefault();
-                openView('contact-view');
+                document.querySelectorAll('.post-view, .contact-view').forEach(view => {
+                    view.classList.remove('active');
+                });
+                document.getElementById('contact-view').classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
-
-            // Navegación suave para anclas internas (si las hubiera)
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const targetId = this.getAttribute('href').substring(1);
-                    // Si es un link interno (no una vista), scrollear
-                    if (!targetId.startsWith('view-')) {
-                        const target = document.getElementById(targetId);
-                        if (target) {
-                            e.preventDefault();
-                            target.scrollIntoView({
+            
+            // Navegación suave
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        if(targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
                                 behavior: 'smooth'
                             });
                         }
