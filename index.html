@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,6 +13,7 @@
             --card-bg: rgba(25, 42, 65, 0.7);
             --transition-slow: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-fast: all 0.3s ease;
+            --header-height: 140px; /* Altura real del header fijo */
         }
         
         * {
@@ -29,7 +29,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
-            padding-top: 5rem;
+            padding-top: var(--header-height);
         }
         
         /* Custom Cursor Styles */
@@ -441,7 +441,7 @@
         }
         
         .post-content {
-            max-width: 700px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
             background: var(--card-bg);
@@ -856,6 +856,54 @@
             color: #B07D62;
         }
         
+        /* New Pages Structure */
+        .overlay-page {
+            padding: 120px 20px 40px;
+            max-width: 900px;
+            margin: auto;
+            position: relative;
+        }
+        
+        .close-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            color: var(--copper-accent);
+            font-size: 1.4rem;
+            border: none;
+            cursor: pointer;
+            z-index: 2001;
+            transition: all 0.2s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .close-btn:hover {
+            transform: rotate(90deg);
+            background: rgba(176, 125, 98, 0.15);
+        }
+        
+        .overlay-page h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-align: left !important;
+            color: var(--copper-accent);
+        }
+        
+        .overlay-page .meta {
+            color: var(--copper-accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
         /* Animations */
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(176, 125, 98, 0.4); }
@@ -915,11 +963,16 @@
                 align-items: flex-start;
                 gap: 10px;
             }
+            
+            .overlay-page {
+                padding: 100px 15px 30px;
+            }
         }
         
         @media (max-width: 768px) {
             body {
                 padding-top: 4rem;
+                --header-height: 180px;
             }
             
             header {
@@ -972,6 +1025,10 @@
             
             .contact-content {
                 padding: 2rem;
+            }
+            
+            .overlay-page {
+                padding: 100px 15px 30px;
             }
         }
         
@@ -1068,6 +1125,10 @@
                 width: 100%;
                 text-align: center;
             }
+            
+            .overlay-page {
+                padding: 80px 10px 20px;
+            }
         }
     </style>
 </head>
@@ -1081,21 +1142,21 @@
         <a href="#" class="logo">Nexum & Logic</a>
         <nav>
             <ul>
-                <li class="nav-item" data-index="01"><a href="#historical">Análisis Histórico</a></li>
-                <li class="nav-item" data-index="02"><a href="#intel">Inteligencia 5C/2I</a></li>
-                <li class="nav-item" data-index="03"><a href="#logiclab">Laboratorio Lógico</a></li>
-                <li class="nav-item" data-index="04"><a href="#static">Estática en Movimiento</a></li>
+                <li class="nav-item" data-index="01"><a href="#historical">Historial Forensics</a></li>
+                <li class="nav-item" data-index="02"><a href="#intel">5C/2I Intel</a></li>
+                <li class="nav-item" data-index="03"><a href="#logiclab">The Logic Lab</a></li>
+                <li class="nav-item" data-index="04"><a href="#static">Static in Motion</a></li>
             </ul>
         </nav>
     </header>
     
     <!-- Security Monitor Banner -->
     <div class="banner-container">
-        <img src="banner_nexum.webp" alt="Monitor de Seguridad Institucional" class="main-banner">
+        <img src="banner_nexum.webp" alt="Security Monitor Feed" class="main-banner">
         <div class="banner-overlay"></div>
         <div class="banner-status">
             <span class="status-dot"></span>
-            CONEXIÓN SEGURA • MONITOREO ACTIVO
+            SECURE CONNECTION • MONITOR ACTIVE
         </div>
     </div>
     
@@ -1215,6 +1276,178 @@
         </div>
     </div>
     
+    <!-- New Pages - Historial Forensics -->
+    <div class="post-view" id="historical-view">
+        <button class="close-post" onclick="history.back()">&times;</button>
+        <div class="post-content">
+            <header class="post-header">
+                <h1 class="post-view-title">&gt; [HISTORIAL_FORENSICS]: ANÁLISIS DE TRANSICIÓN</h1>
+                <div class="post-meta">
+                    <span>Fecha: Feb-2026</span>
+                    <span>Origen: UNTDF / Ius Lex</span>
+                    <span>Estado: Desclasificado</span>
+                </div>
+            </header>
+            <div class="post-body">
+                <p>El análisis forense histórico ha evolucionado desde metodologías basadas en pruebas documentales hacia sistemas de análisis dinámico que integran datos en tiempo real. Este enfoque permite identificar patrones ocultos y prevenir amenazas antes de que se materialicen.</p>
+                
+                <p>La transición de lo estático a lo dinámico representa un salto cualitativo en la capacidad de respuesta ante amenazas emergentes. A diferencia de los métodos tradicionales, el análisis en tiempo real permite ajustar estrategias de mitigación conforme los patrones evolucionan.</p>
+                
+                <p>Nuestro marco de análisis combina técnicas forenses clásicas con algoritmos avanzados de detección de anomalías, permitiendo identificar correlaciones que pasarían desapercibidas con métodos estáticos tradicionales.</p>
+                
+                <p>La aplicación de este enfoque en el caso de la auditoría de transacciones financieras en 2011 demostró su eficacia al identificar patrones de lavado de activos que habían pasado desapercibidos por sistemas de análisis estáticos.</p>
+                
+                <p>Este análisis histórico sirve como base para el desarrollo de metodologías predictivas que permiten anticipar amenazas antes de que se materialicen, transformando la inteligencia estratégica de reactiva a proactiva.</p>
+            </div>
+            
+            <div class="comments-section">
+                <section class="sovereign-comments">
+                    <h3>&gt; [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
+                    <p>
+                        Para garantizar la integridad de este nodo y la privacidad absoluta de los flujos de información, <strong>Nexum & Logic</strong> ha optado por un sistema de comunicación soberano. Al evitar la ejecución de scripts externos, mantenemos la terminal libre de telemetría de terceros. La interacción se centraliza directamente en el motor de Discussions de nuestro repositorio.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="https://github.com/nerdyar/Nexum-Logic/discussions" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="discussion-link">
+                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) &gt;&gt;
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Pages - 5C/2I Intel -->
+    <div class="post-view" id="intel-view">
+        <button class="close-post" onclick="history.back()">&times;</button>
+        <div class="post-content">
+            <header class="post-header">
+                <h1 class="post-view-title">&gt; [5C/2I_INTEL]: INTELIGENCIA ESTRATÉGICA</h1>
+                <div class="post-meta">
+                    <span>Fecha: Feb-2026</span>
+                    <span>Origen: RGA-TDF / Ius Lex</span>
+                    <span>Estado: Desclasificado</span>
+                </div>
+            </header>
+            <div class="post-body">
+                <p>La metodología 5C/2I (Contexto, Contenido, Código, Causa, Consecuencia / Intención, Impacto) representa un marco estructurado para el análisis de inteligencia. Este enfoque permite desglosar información compleja en componentes manejables que pueden ser analizados sistemáticamente.</p>
+                
+                <p>La aplicación de esta metodología en el análisis de amenazas cibernéticas ha demostrado ser particularmente efectiva, permitiendo identificar vectores de ataque antes de que se materialicen. El análisis del contexto permite entender los motivos detrás de los ataques, mientras que el análisis del código identifica los mecanismos técnicos utilizados.</p>
+                
+                <p>Nuestra implementación de la metodología 5C/2I incluye algoritmos avanzados de procesamiento de lenguaje natural que permiten analizar grandes volúmenes de datos en tiempo real, identificando patrones que serían imposibles de detectar mediante análisis manual.</p>
+                
+                <p>Este enfoque estructurado ha permitido a nuestro equipo identificar amenazas emergentes antes de que se materialicen, transformando la inteligencia estratégica de reactiva a proactiva. La aplicación de 5C/2I en el análisis de la campaña Aurora Sentinel demostró su eficacia al identificar tácticas de infiltración antes de que se pudieran ejecutar.</p>
+                
+                <p>El análisis de intención e impacto permite entender no solo qué está ocurriendo, sino por qué está ocurriendo y cuál será el efecto potencial, permitiendo desarrollar estrategias de mitigación proactivas.</p>
+            </div>
+            
+            <div class="comments-section">
+                <section class="sovereign-comments">
+                    <h3>&gt; [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
+                    <p>
+                        Para garantizar la integridad de este nodo y la privacidad absoluta de los flujos de información, <strong>Nexum & Logic</strong> ha optado por un sistema de comunicación soberano. Al evitar la ejecución de scripts externos, mantenemos la terminal libre de telemetría de terceros. La interacción se centraliza directamente en el motor de Discussions de nuestro repositorio.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="https://github.com/nerdyar/Nexum-Logic/discussions" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="discussion-link">
+                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) &gt;&gt;
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Pages - The Logic Lab -->
+    <div class="post-view" id="logiclab-view">
+        <button class="close-post" onclick="history.back()">&times;</button>
+        <div class="post-content">
+            <header class="post-header">
+                <h1 class="post-view-title">&gt; [LOGIC_LAB]: INNOVACIÓN METODOLÓGICA</h1>
+                <div class="post-meta">
+                    <span>Fecha: Feb-2026</span>
+                    <span>Origen: UNTDF / Ius Lex</span>
+                    <span>Estado: Desclasificado</span>
+                </div>
+            </header>
+            <div class="post-body">
+                <p>El Laboratorio Lógico representa nuestro espacio de innovación metodológica, donde probamos y refinamos nuevas técnicas de análisis. Este enfoque combina principios lógicos rigurosos con aplicaciones prácticas en el mundo real, permitiendo desarrollar metodologías que son tanto teóricamente sólidas como prácticamente aplicables.</p>
+                
+                <p>Nuestro enfoque se basa en el principio de que la lógica debe servir para resolver problemas reales, no solo para construir sistemas teóricos abstractos. Cada metodología desarrollada en el Laboratorio Lógico es sometida a pruebas rigurosas en escenarios del mundo real antes de ser adoptada en nuestro análisis operativo.</p>
+                
+                <p>La aplicación de la Ley de Benford en el análisis de transacciones financieras ha demostrado ser particularmente efectiva para identificar anomalías en registros contables. Este enfoque, que inicialmente fue considerado teórico, ha demostrado su utilidad práctica en múltiples casos de auditoría forense.</p>
+                
+                <p>Nuestro trabajo en el Laboratorio Lógico también incluye el desarrollo de algoritmos de análisis predictivo que permiten anticipar amenazas antes de que se materialicen. Estos algoritmos se basan en principios lógicos sólidos pero se aplican en contextos prácticos reales, permitiendo transformar la inteligencia estratégica de reactiva a proactiva.</p>
+                
+                <p>El enfoque del Laboratorio Lógico se basa en la idea de que la mejor metodología es aquella que combina rigurosidad teórica con aplicabilidad práctica, permitiendo resolver problemas reales de manera efectiva.</p>
+            </div>
+            
+            <div class="comments-section">
+                <section class="sovereign-comments">
+                    <h3>&gt; [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
+                    <p>
+                        Para garantizar la integridad de este nodo y la privacidad absoluta de los flujos de información, <strong>Nexum & Logic</strong> ha optado por un sistema de comunicación soberano. Al evitar la ejecución de scripts externos, mantenemos la terminal libre de telemetría de terceros. La interacción se centraliza directamente en el motor de Discussions de nuestro repositorio.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="https://github.com/nerdyar/Nexum-Logic/discussions" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="discussion-link">
+                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) &gt;&gt;
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Pages - Static in Motion -->
+    <div class="post-view" id="static-view">
+        <button class="close-post" onclick="history.back()">&times;</button>
+        <div class="post-content">
+            <header class="post-header">
+                <h1 class="post-view-title">&gt; [STATIC_IN_MOTION]: DINÁMICA ESTRATÉGICA</h1>
+                <div class="post-meta">
+                    <span>Fecha: Feb-2026</span>
+                    <span>Origen: RGA-TDF / Ius Lex</span>
+                    <span>Estado: Desclasificado</span>
+                </div>
+            </header>
+            <div class="post-body">
+                <p>El concepto de "Static in Motion" representa nuestra filosofía central: la idea de que lo estático debe ser entendido dentro de un contexto dinámico. Este enfoque permite analizar sistemas que aparentemente son estáticos pero que en realidad están en constante evolución.</p>
+                
+                <p>En el análisis de infraestructuras críticas, este enfoque ha demostrado ser particularmente valioso. Los sistemas que aparentemente son estáticos (como redes eléctricas o sistemas de agua potable) están en realidad en constante evolución, y su análisis requiere comprender no solo su estado actual, sino también su trayectoria histórica y sus proyecciones futuras.</p>
+                
+                <p>Nuestro enfoque de "Static in Motion" combina análisis de datos históricos con proyecciones predictivas, permitiendo identificar tendencias emergentes antes de que se materialicen. Este enfoque nos permite anticipar amenazas antes de que se manifiesten, transformando la inteligencia estratégica de reactiva a proactiva.</p>
+                
+                <p>La aplicación de este enfoque en el análisis de amenazas cibernéticas ha permitido identificar patrones de comportamiento que serían imposibles de detectar mediante análisis estáticos tradicionales. Al entender los sistemas como dinámicos en lugar de estáticos, podemos identificar anomalías antes de que se conviertan en amenazas reales.</p>
+                
+                <p>Este enfoque también nos permite desarrollar estrategias de mitigación que no solo responden a amenazas actuales, sino que también anticipan amenazas futuras, permitiendo una gestión proactiva de riesgos en lugar de una respuesta reactiva.</p>
+            </div>
+            
+            <div class="comments-section">
+                <section class="sovereign-comments">
+                    <h3>&gt; [MODO: SOBERANÍA_DE_DATOS_ACTIVADO]</h3>
+                    <p>
+                        Para garantizar la integridad de este nodo y la privacidad absoluta de los flujos de información, <strong>Nexum & Logic</strong> ha optado por un sistema de comunicación soberano. Al evitar la ejecución de scripts externos, mantenemos la terminal libre de telemetría de terceros. La interacción se centraliza directamente en el motor de Discussions de nuestro repositorio.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="https://github.com/nerdyar/Nexum-Logic/discussions" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="discussion-link">
+                           ACCEDER AL CANAL DE DISCUSIÓN (GITHUB) &gt;&gt;
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
     <!-- Contact View -->
     <div class="contact-view" id="contact-view">
         <button class="close-post">&times;</button>
@@ -1259,7 +1492,7 @@
             <a href="#" id="contact-link">Contacto</a>
             <a href="#">Política de Privacidad</a>
             <a href="#">Términos de Uso</a>
-            <a href="https://github.com/nexum-logic" target="_blank">GitHub</a>
+            <a href="https://github.com/nexum-logic" target="_blank" rel="noopener">GitHub</a>
         </div>
     </footer>
     
@@ -1281,7 +1514,7 @@
     <!-- AI Recognition Node -->
     <div class="ai-recognition-node">
         <p>
-            <strong>&gt; [SISTEMA_COLABORATIVO]:</strong> Los reportes e investigaciones alojados en esta terminal son el resultado de un proceso de <strong>Ingeniería de Prompt Estratégico</strong>, ejecutado mediante una arquitectura de <strong>Sistemas de IA Multitransversales y Cooperativos</strong> (Gemini, Qwen, ChatGPT, Grok y modelos de soporte). 
+            <strong>&gt; [SISTEMA_COLABORATIVO]:</strong> Los reportes e investigaciones alojados en esta terminal son el resultado de un proceso de <strong>Prompt Engineering Estratégico</strong>, ejecutado mediante una arquitectura de <strong>Sistemas de IA Multitransversales y Cooperativos</strong> (Gemini, Qwen, ChatGPT, Grok y modelos de soporte). 
         </p>
         <p>
             Este nodo reconoce el <em>insight</em> único nacido de la intersección tecnológica, así como el invaluable esfuerzo de las personas —desarrolladores, investigadores y lingüistas— cuyo trabajo sustenta estas herramientas. La inteligencia estratégica es, ante todo, un logro colectivo.
@@ -1448,4 +1681,6 @@
     </script>
 </body>
 </html>
+
+
 
